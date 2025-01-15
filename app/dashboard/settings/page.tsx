@@ -1,9 +1,9 @@
 "use client";
-import EnquiryList from "@/components/server/enquiry/enquiry-list";
+
 import { useBreadcrumbStore } from "@/hooks/use-breadcrumb-store";
 import React, { useEffect } from "react";
 
-const HomePage = () => {
+const SettingsPage = () => {
   const { setBreadcrumbs } = useBreadcrumbStore();
   useEffect(() => {
     setBreadcrumbs([
@@ -12,17 +12,13 @@ const HomePage = () => {
         href: "/dashboard",
       },
       {
-        title: "Enquiries",
+        title: "Settings",
         href: "#",
       },
     ]);
   }, [setBreadcrumbs]);
 
-  return (
-    <div className="container mx-auto ">
-      <EnquiryList />
-    </div>
-  );
+  return <div className="container mx-auto ">Settings Page</div>;
 };
 
-export default HomePage;
+export default SettingsPage;
