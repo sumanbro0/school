@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
-import user from './user'
 import enquiry from './enquiry'
 
 //'nodejs'
@@ -10,7 +9,6 @@ const app = new Hono().basePath('/api')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes=app
-    .route("/home",user)
     .route("/enquiry",enquiry)
 
 
