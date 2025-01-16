@@ -2,12 +2,16 @@ import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 import { Button } from "../ui/button";
 
-import { school as scl } from "@/db/schemas/school";
-import { db } from "@/db";
 import NavBar from "./nav-bar";
+import { getSchool } from "@/actions/get-school";
 
 export async function Navigation() {
-  const [school] = await db.select().from(scl).limit(1);
+  const school = await getSchool();
+  console.log(school);
+
+  if (!school) {
+    console.log("No school found");
+  }
 
   return (
     <header className="w-full">
@@ -40,7 +44,7 @@ export async function Navigation() {
           </div>
         </div>
       </div>
-      <NavBar logoLabel={school?.logoLabel} />
+      <NavBar logoLabel={school?.logoLabel || ""} />
     </header>
   );
 }
