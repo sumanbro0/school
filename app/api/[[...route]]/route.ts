@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import {cors} from 'hono/cors'
 import { handle } from 'hono/vercel'
 import enquiry from './enquiry'
+import school from './school'
 
 //'nodejs'
  export const runtime = 'nodejs'
@@ -18,6 +19,7 @@ app.use('*', cors({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes=app
     .route("/enquiry",enquiry)
+    .route("/school",school)
 
 
 

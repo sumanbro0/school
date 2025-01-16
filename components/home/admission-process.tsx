@@ -35,7 +35,6 @@ const steps = [
 
 export function AdmissionProcess() {
   const [currentStep, setCurrentStep] = useState(0);
-
   return (
     <div className="my-10 flex flex-col gap-10">
       <h3 className="text-center text-2xl font-bold mb-8">

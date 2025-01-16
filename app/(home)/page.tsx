@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 import { BookOpen, GraduationCap, MapPin, Phone, School } from "lucide-react";
+import React from "react";
 
 export default function Home() {
+  const [open, setOpen] = React.useState(false);
   return (
     <div className="min-h-screen bg-background container">
       {/* Hero Section */}
@@ -25,7 +27,7 @@ export default function Home() {
           {/* <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
             Apply Now
           </Button> */}
-          <AdmissionFormModal />
+          <AdmissionFormModal open={open} onOpenChange={setOpen} />
         </div>
       </section>
 
@@ -87,7 +89,7 @@ export default function Home() {
       </section>
 
       {/* Admission Form Section */}
-      <section className=" py-16">
+      <section id="admission-form" className=" py-16">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="mb-12 text-center text-3xl font-bold">
             Admission Enquiry

@@ -1,0 +1,1 @@
+ALTER TABLE "school" ADD COLUMN "logoLabel" varchar(255) NOT NULL;

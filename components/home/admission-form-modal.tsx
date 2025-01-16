@@ -4,10 +4,15 @@ import { DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import AdmissionForm from "./admission-form";
 
-const AdmissionFormModal = () => {
-  const [open, setOpen] = React.useState(false);
+const AdmissionFormModal = ({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button
           className="bg-white text-primary hover:bg-gray-100"
@@ -23,7 +28,7 @@ const AdmissionFormModal = () => {
 
         <AdmissionForm
           onSuccess={() => {
-            setOpen(false);
+            onOpenChange(false);
           }}
         />
       </DialogContent>

@@ -9,8 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { client } from "@/lib/hono";
 
-export function Navigation() {
+export async function Navigation() {
+  const res = await client.api.school.$get();
+  const { scl: school } = await res.json();
+
   return (
     <header className="w-full">
       {/* Top Bar */}
@@ -18,18 +22,18 @@ export function Navigation() {
         <div className="container mx-auto max-w-7xl px-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center space-x-6">
             <Link
-              href="tel:8-888-888-999"
+              href={`tel:${school.phone}`}
               className="flex items-center gap-2 hover:text-gray-200"
             >
               <Phone className="h-4 w-4" />
-              <span>8-888-888-999</span>
+              <span>{school.phone}</span>
             </Link>
             <Link
-              href="mailto:info@orchids.edu.in"
+              href={`mailto:${school.email}`}
               className="flex items-center gap-2 hover:text-gray-200"
             >
               <Mail className="h-4 w-4" />
-              <span>info@orchids.edu.in</span>
+              <span>{school.email}</span>
             </Link>
           </div>
           <div className="flex items-center gap-4">
@@ -49,7 +53,7 @@ export function Navigation() {
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <Link href="/" className="text-2xl font-bold text-[#B01B2E]">
-                ORCHIDS
+                {school.logoLabel}
               </Link>
             </div>
 
@@ -59,8 +63,14 @@ export function Navigation() {
                   Admission <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>
-                    <Link href="/admission/form" className="w-full">
+                  <DropdownMenuItem
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      scroll();
+                    }}
+                  >
+                    <Link href="#" className="w-full">
                       Admission Form
                     </Link>
                   </DropdownMenuItem>
