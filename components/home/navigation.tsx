@@ -1,14 +1,10 @@
 import Link from "next/link";
-import { Phone, Mail, ChevronDown } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { Button } from "../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+
 import { school as scl } from "@/db/schemas/school";
 import { db } from "@/db";
+import NavBar from "./nav-bar";
 
 export async function Navigation() {
   const [school] = await db.select().from(scl).limit(1);
@@ -44,96 +40,7 @@ export async function Navigation() {
           </div>
         </div>
       </div>
-
-      {/* Main Navigation */}
-      <nav className="bg-white border-b">
-        <div className="container mx-auto max-w-7xl px-4">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-[#B01B2E]">
-                {school?.logoLabel}
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
-                  Admission <ChevronDown className="h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  //   e.stopPropagation();
-                  //   scroll();
-                  // }}
-                  >
-                    <Link href="#" className="w-full">
-                      Admission Form
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/admission/fee-structure" className="w-full">
-                      Fee Structure
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <NavLink href="/academics">Academics</NavLink>
-              <NavLink href="/blogs">Blogs</NavLink>
-              <NavLink href="/about">About Us</NavLink>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
-                  Activities <ChevronDown className="h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>
-                    <Link href="/activities/sports" className="w-full">
-                      Sports
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/activities/arts" className="w-full">
-                      Arts & Culture
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/activities/clubs" className="w-full">
-                      Student Clubs
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/activities/events" className="w-full">
-                      School Events
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <Button className="bg-[#B01B2E] text-white hover:bg-[#8B1624]">
-              Admissions 2025-26
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <NavBar logoLabel={school?.logoLabel} />
     </header>
-  );
-}
-
-function NavLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="text-gray-700 hover:text-[#B01B2E] font-medium transition-colors"
-    >
-      {children}
-    </Link>
   );
 }

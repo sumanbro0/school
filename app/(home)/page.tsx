@@ -1,5 +1,3 @@
-"use client";
-
 import AdmissionForm from "@/components/home/admission-form";
 import AdmissionFormModal from "@/components/home/admission-form-modal";
 import { AdmissionProcess } from "@/components/home/admission-process";
@@ -11,7 +9,6 @@ import { BookOpen, GraduationCap, MapPin, Phone, School } from "lucide-react";
 import React from "react";
 
 export default function Home() {
-  const [open, setOpen] = React.useState(false);
   return (
     <div className="min-h-screen bg-background container">
       {/* Hero Section */}
@@ -27,7 +24,7 @@ export default function Home() {
           {/* <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
             Apply Now
           </Button> */}
-          <AdmissionFormModal open={open} onOpenChange={setOpen} />
+          <AdmissionFormModal />
         </div>
       </section>
 

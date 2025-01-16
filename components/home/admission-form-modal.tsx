@@ -1,18 +1,15 @@
+"use client";
 import { Dialog, DialogTitle } from "@radix-ui/react-dialog";
 import React from "react";
 import { DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import AdmissionForm from "./admission-form";
+import { useFormModalStore } from "@/hooks/use-form-modal-store";
 
-const AdmissionFormModal = ({
-  open,
-  onOpenChange,
-}: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) => {
+const AdmissionFormModal = () => {
+  const { isOpen, setIsOpen } = useFormModalStore();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           className="bg-white text-primary hover:bg-gray-100"
@@ -28,7 +25,7 @@ const AdmissionFormModal = ({
 
         <AdmissionForm
           onSuccess={() => {
-            onOpenChange(false);
+            setIsOpen(false);
           }}
         />
       </DialogContent>

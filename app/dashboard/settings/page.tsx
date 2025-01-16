@@ -64,8 +64,8 @@ const SettingsPage = () => {
         school={
           school && {
             ...school?.scl,
-            createdAt: new Date(school?.scl.createdAt || ""),
-            updatedAt: new Date(school?.scl.updatedAt || ""),
+            createdAt: new Date(school?.scl?.createdAt || ""),
+            updatedAt: new Date(school?.scl?.updatedAt || ""),
           }
         }
         onSubmit={handleSubmit}
