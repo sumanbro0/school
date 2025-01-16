@@ -9,10 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { getSchoolInfo } from "../server/school-action";
+import { school as scl } from "@/db/schemas/school";
+import { db } from "@/db";
 
 export async function Navigation() {
-  const { data: school } = await getSchoolInfo();
+  const [school] = await db.select().from(scl).limit(1);
 
   return (
     <header className="w-full">
