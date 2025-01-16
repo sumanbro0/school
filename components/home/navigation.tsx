@@ -62,11 +62,11 @@ export async function Navigation() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      scroll();
-                    }}
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   e.stopPropagation();
+                  //   scroll();
+                  // }}
                   >
                     <Link href="#" className="w-full">
                       Admission Form
