@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
