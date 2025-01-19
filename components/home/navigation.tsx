@@ -14,7 +14,7 @@ export async function Navigation() {
   }
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 shadow-lg">
+    <header className="w-screen fixed top-0 left-0 right-0 z-50 shadow-lg">
       {/* Top Bar */}
       <div className="bg-[#B01B2E] text-white">
         <div className="container mx-auto max-w-7xl px-4 py-2 flex flex-wrap items-center justify-between gap-4">
