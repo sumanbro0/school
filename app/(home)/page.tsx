@@ -1,6 +1,6 @@
 import AdmissionForm from "@/components/home/admission-form";
-import AdmissionFormModal from "@/components/home/admission-form-modal";
 import { AdmissionProcess } from "@/components/home/admission-process";
+import TriggerFormModal from "@/components/home/trigger-form-modal";
 import { TrustedSection } from "@/components/home/trusted-section";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -21,10 +21,8 @@ export default function Home() {
           <p className="mb-8 text-xl">
             Nurturing Excellence, Building Future Leaders
           </p>
-          {/* <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-            Apply Now
-          </Button> */}
-          <AdmissionFormModal />
+
+          <TriggerFormModal />
         </div>
       </section>
 
