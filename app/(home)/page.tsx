@@ -5,12 +5,12 @@ import { TrustedSection } from "@/components/home/trusted-section";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-import { BookOpen, GraduationCap, MapPin, Phone, School } from "lucide-react";
+import { BookOpen, GraduationCap,  School } from "lucide-react";
 import React from "react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background container">
+    <div className="min-h-screen bg-background mx-auto">
       {/* Hero Section */}
       <section className="relative h-[500px] bg-gradient-to-r from-primary to-blue-600">
         <div className="absolute inset-0 bg-black/50" />
@@ -95,34 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16 bg-black text-white">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div>
-              <h2 className="mb-6 text-3xl font-bold">Contact Us</h2>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary" />
-                  <p>123 Education Street, Mumbai, Maharashtra 400001</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <p>+91 1234567890</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h2 className="mb-6 text-3xl font-bold">School Timings</h2>
-              <div className="space-y-2">
-                <p>Monday - Friday: 8:00 AM - 3:00 PM</p>
-                <p>Saturday: 8:00 AM - 12:00 PM</p>
-                <p>Sunday: Closed</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

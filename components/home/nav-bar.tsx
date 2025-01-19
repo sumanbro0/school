@@ -9,12 +9,16 @@ import {
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { useFormModalStore } from "@/hooks/use-form-modal-store";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const NavBar = ({}: { logoLabel: string }) => {
   const { setIsOpen } = useFormModalStore();
+  const pathName=usePathname().split("/").filter(p=>!!p)
+  console.log(pathName)
   return (
-    <nav className=" bg-gray-50 w-full hidden md:block ">
-      <div className=" flex items-center justify-between py-2  px-4 container max-w-7xl mx-auto">
+    <nav className=" bg-gray-50 w-full  hidden md:block px-4 ">
+      <div className=" flex items-center justify-between py-2  px-4 max-w-2xl mx-auto">
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
             Admission <ChevronDown className="h-4 w-4" />
@@ -36,10 +40,12 @@ const NavBar = ({}: { logoLabel: string }) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <NavLink href="/academics">Academics</NavLink>
-        <NavLink href="/blogs">Blogs</NavLink>
-        <NavLink href="/about">About Us</NavLink>
-        <DropdownMenu>
+        <NavLink pathName={pathName} href="/academics">Academics</NavLink>
+        <NavLink pathName={pathName} href="/blogs">Blogs</NavLink>
+        <NavLink pathName={pathName} href="/about">About Us</NavLink>
+        <NavLink pathName={pathName} href="/activities">Activities</NavLink>
+
+        {/* <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
             Activities <ChevronDown className="h-4 w-4" />
           </DropdownMenuTrigger>
@@ -65,7 +71,7 @@ const NavBar = ({}: { logoLabel: string }) => {
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
     </nav>
   );
@@ -74,14 +80,17 @@ const NavBar = ({}: { logoLabel: string }) => {
 function NavLink({
   href,
   children,
+  pathName,
 }: {
   href: string;
   children: React.ReactNode;
+  pathName:string[],
 }) {
+
   return (
     <Link
       href={href}
-      className="text-gray-700 hover:text-[#B01B2E] font-medium transition-colors"
+      className={cn("text-gray-700 hover:text-[#B01B2E] font-medium transition-colors",(pathName[pathName.length -1]==(href.split("/")[1])) && "bg-primary text-primary-foreground hover:text-primary-foreground px-2 rounded-lg" )}
     >
       {children}
     </Link>

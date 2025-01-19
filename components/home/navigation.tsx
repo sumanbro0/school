@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
-import { Button } from "../ui/button";
 
 import NavBar from "./nav-bar";
 import { getSchool } from "@/actions/get-school";
 import Image from "next/image";
+import TriggerFormModal from "./trigger-form-modal";
 
 export async function Navigation() {
   const school = await getSchool();
@@ -14,7 +14,7 @@ export async function Navigation() {
   }
 
   return (
-    <header className="w-full">
+    <header className="w-full fixed top-0 left-0 right-0 z-50 shadow-lg">
       {/* Top Bar */}
       <div className="bg-[#B01B2E] text-white">
         <div className="container mx-auto max-w-7xl px-4 py-2 flex flex-wrap items-center justify-between gap-4">
@@ -47,7 +47,11 @@ export async function Navigation() {
                 <span>{school?.email}</span>
               </Link>
             </div>
-            <Button className="bg-black hover:bg-gray-800">Contact Us</Button>
+            {/* <Button className="bg-black hover:bg-gray-800">Contact Us</Button> */}
+            <TriggerFormModal
+              className="bg-black hover:bg-gray-800 text-primary-foreground hover:text-primary-foreground"
+              triggerText="Contact Us"
+              />
           </div>
         </div>
         <NavBar logoLabel={school?.logoLabel || ""} />
