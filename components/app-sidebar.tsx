@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Home, Mail, School, Settings2 } from "lucide-react";
+import { Home, Mail, School, Settings2, Text } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 // import { NavUser } from "@/components/nav-user";
@@ -39,6 +39,12 @@ const data = {
       title: "Enquiries",
       url: "/dashboard/enquiries",
       icon: Mail,
+      isActive: true,
+    },
+    {
+      title: "Contents",
+      url: "/dashboard/contents",
+      icon: Text,
       isActive: true,
     },
     {

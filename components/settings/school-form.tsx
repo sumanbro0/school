@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,8 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertSchoolSchema } from "@/db/schemas/school";
-import FileUpload from "../file-upload";
 import { InsertSchool, School } from "@/types/school";
+import { UploadWidget } from "../image-uploader";
 
 interface SchoolFormProps {
   school?: School;
@@ -28,9 +28,6 @@ export default function SchoolForm({
   onSubmit,
   isLoading = false,
 }: SchoolFormProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string>(school?.logo ?? "");
-
   const form = useForm<InsertSchool>({
     resolver: zodResolver(insertSchoolSchema),
     defaultValues: {
@@ -53,42 +50,15 @@ export default function SchoolForm({
         logo: school.logo,
         logoLabel: school.logoLabel,
       });
-
-      setPreviewUrl(school.logo);
     }
   }, [school, form]);
 
   const handleSubmit = async (values: InsertSchool) => {
     try {
-      await onSubmit(values, selectedFile ?? undefined);
+      await onSubmit(values);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (!file.type.startsWith("image/")) {
-        alert("Please upload an image file");
-        return;
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        alert("File size must be less than 5MB");
-        return;
-      }
-
-      setSelectedFile(file);
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-    }
-  };
-
-  const handleRemoveFile = () => {
-    setSelectedFile(null);
-    setPreviewUrl("");
-    form.setValue("logo", "");
   };
 
   return (
@@ -96,12 +66,17 @@ export default function SchoolForm({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
           {/* Logo Preview and Upload */}
-          <FileUpload
+          {/* <FileUpload
             previewUrl={previewUrl}
             onFileChange={handleFileChange}
             onRemove={handleRemoveFile}
+          /> */}
+          <UploadWidget
+            onUploadSuccess={(url) => {
+              form.setValue("logo", url);
+            }}
+            value={form.watch("logo") && form.getValues("logo")}
           />
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
@@ -170,12 +145,7 @@ export default function SchoolForm({
                 <FormItem>
                   <FormLabel>Logo URL</FormLabel>
                   <FormControl>
-                    <Input
-                      type="url"
-                      placeholder="Enter logo URL"
-                      {...field}
-                      disabled={!!selectedFile}
-                    />
+                    <Input type="url" placeholder="Enter logo URL" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -5,23 +5,28 @@ import { TrustedSection } from "@/components/home/trusted-section";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-import { BookOpen, GraduationCap,  School } from "lucide-react";
+import { BookOpen, GraduationCap, School } from "lucide-react";
 import React from "react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background mx-auto">
       {/* Hero Section */}
-      <section className="relative h-[500px] bg-gradient-to-r from-primary to-blue-600">
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="container relative z-10 mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-4 text-center text-white">
+      <section
+        className="relative h-[700px]  bg-gradient-to-r from-primary to-blue-600 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            'url("https://www.mdnpublicschool.com//upload/banner/6698d5d4cc856-rocksport-home-banner-min1693813060.jpg")',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="container relative z-10 mx-auto pt-80 flex h-full max-w-6xl flex-col items-center justify-center px-4 text-center text-white">
           <h1 className="mb-6 text-5xl font-bold">
             Welcome to Orchids International School
           </h1>
           <p className="mb-8 text-xl">
             Nurturing Excellence, Building Future Leaders
           </p>
-
           <TriggerFormModal />
         </div>
       </section>
@@ -94,8 +99,6 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
-      
     </div>
   );
 }

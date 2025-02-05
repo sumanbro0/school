@@ -14,13 +14,15 @@ import { cn } from "@/lib/utils";
 
 const NavBar = ({}: { logoLabel: string }) => {
   const { setIsOpen } = useFormModalStore();
-  const pathName=usePathname().split("/").filter(p=>!!p)
-  console.log(pathName)
+  const pathName = usePathname()
+    .split("/")
+    .filter((p) => !!p);
+  console.log(pathName);
   return (
-    <nav className=" bg-gray-50 w-full  hidden md:block px-4 ">
+    <nav className=" bg-[#141744]  text-gray-50 w-full  hidden md:block px-4 ">
       <div className=" flex items-center justify-between py-2  px-4 max-w-2xl mx-auto">
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
+          <DropdownMenuTrigger className="flex items-center gap-1 font-medium transition-colors">
             Admission <ChevronDown className="h-4 w-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -40,10 +42,18 @@ const NavBar = ({}: { logoLabel: string }) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <NavLink pathName={pathName} href="/academics">Academics</NavLink>
-        <NavLink pathName={pathName} href="/blogs">Blogs</NavLink>
-        <NavLink pathName={pathName} href="/about">About Us</NavLink>
-        <NavLink pathName={pathName} href="/activities">Activities</NavLink>
+        <NavLink pathName={pathName} href="/academics">
+          Academics
+        </NavLink>
+        <NavLink pathName={pathName} href="/blogs">
+          Blogs
+        </NavLink>
+        <NavLink pathName={pathName} href="/about">
+          About Us
+        </NavLink>
+        <NavLink pathName={pathName} href="/activities">
+          Activities
+        </NavLink>
 
         {/* <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-[#B01B2E] font-medium transition-colors">
@@ -84,13 +94,16 @@ function NavLink({
 }: {
   href: string;
   children: React.ReactNode;
-  pathName:string[],
+  pathName: string[];
 }) {
-
   return (
     <Link
       href={href}
-      className={cn("text-gray-700 hover:text-[#B01B2E] font-medium transition-colors",(pathName[pathName.length -1]==(href.split("/")[1])) && "bg-primary text-primary-foreground hover:text-primary-foreground px-2 rounded-lg" )}
+      className={cn(
+        " font-medium transition-colors",
+        pathName[pathName.length - 1] == href.split("/")[1] &&
+          "bg-background text-primary hover:text-primary px-2 rounded-lg"
+      )}
     >
       {children}
     </Link>

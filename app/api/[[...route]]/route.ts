@@ -3,6 +3,7 @@ import {cors} from 'hono/cors'
 import { handle } from 'hono/vercel'
 import enquiry from './enquiry'
 import school from './school'
+import home from './home'
 
 //'nodejs'
  export const runtime = 'nodejs'
@@ -20,6 +21,7 @@ app.use('*', cors({
 const routes=app
     .route("/enquiry",enquiry)
     .route("/school",school)
+    .route("/home",home)
 
 
 

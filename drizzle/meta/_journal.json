@@ -22,6 +22,27 @@
       "when": 1737018044345,
       "tag": "0002_panoramic_martin_li",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1738752068934,
+      "tag": "0003_elite_shard",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1738752754438,
+      "tag": "0004_acoustic_selene",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1738756798706,
+      "tag": "0005_giant_crusher_hogan",
+      "breakpoints": true
     }
   ]
 }
