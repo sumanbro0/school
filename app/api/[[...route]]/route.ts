@@ -6,6 +6,7 @@ import school from './school'
 import home from './home'
 import blogs from './blogs'
 import fee from './fee'
+import testimonial from './testimonial'
 
 //'nodejs'
  export const runtime = 'nodejs'
@@ -26,6 +27,7 @@ const routes=app
     .route("/home",home)
     .route("/blogs",blogs)
     .route("/fees",fee)
+    .route("/testimonial",testimonial)
 
 
 

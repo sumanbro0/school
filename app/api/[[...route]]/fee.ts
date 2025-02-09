@@ -5,7 +5,7 @@ import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
-import { fees, feesRelations, feeStructure, insertFeeStructureWithFeesSchema } from "@/db/schemas/fee";
+import { fees, feeStructure, insertFeeStructureWithFeesSchema } from "@/db/schemas/fee";
 
 
 const app = new Hono()
@@ -87,9 +87,9 @@ const app = new Hono()
   zValidator('json', insertFeeStructureWithFeesSchema),
   async (c) => {
     const auth = getAuth(c);
-    // if (!auth?.userId) {
-    //   return c.json({ message: 'You are not logged in.' }, 401);
-    // }
+    if (!auth?.userId) {
+      return c.json({ message: 'You are not logged in.' }, 401);
+    }
 
     
     const {id,...values} = c.req.valid("json");

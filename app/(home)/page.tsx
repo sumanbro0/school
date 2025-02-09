@@ -1,13 +1,13 @@
 import AdmissionForm from "@/components/home/admission-form";
 import { AdmissionProcess } from "@/components/home/admission-process";
+import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
 import TriggerFormModal from "@/components/home/trigger-form-modal";
+import WhyChooseUs from "@/components/home/why-choose-us";
 import CarouselSection from "@/components/shared/gallery-carousel";
 import GridSection from "@/components/shared/grid";
 import Section from "@/components/shared/section";
 import { Card } from "@/components/ui/card";
 import { client } from "@/lib/hono";
-
-import { BookOpen, GraduationCap, School } from "lucide-react";
 import React from "react";
 
 export default async function Home() {
@@ -121,39 +121,14 @@ export default async function Home() {
       </div>
       <AdmissionProcess />
       {/* Features Section */}
+
+      <WhyChooseUs />
       <section className="py-16 flex flex-col gap-10 bg-gray-50">
-        <h1 className="text-black font-semibold text-3xl text-center">
-          Why To Choose Us?
-        </h1>
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <Card className="p-6 text-center">
-              <School className="mx-auto mb-4 h-12 w-12 text-primary" />
-              <h3 className="mb-2 text-xl font-semibold">
-                World-Class Education
-              </h3>
-              <p className="text-muted-foreground">
-                State-of-the-art facilities and modern teaching methodologies
-              </p>
-            </Card>
-            <Card className="p-6 text-center">
-              <BookOpen className="mx-auto mb-4 h-12 w-12 text-primary" />
-              <h3 className="mb-2 text-xl font-semibold">
-                Holistic Development
-              </h3>
-              <p className="text-muted-foreground">
-                Focus on academics, sports, arts, and character building
-              </p>
-            </Card>
-            <Card className="p-6 text-center">
-              <GraduationCap className="mx-auto mb-4 h-12 w-12 text-primary" />
-              <h3 className="mb-2 text-xl font-semibold">Expert Faculty</h3>
-              <p className="text-muted-foreground">
-                Experienced teachers dedicated to student success
-              </p>
-            </Card>
-          </div>
+          <h2 className="text-center text-2xl font-semibold">Testimonials</h2>
+          <p className="text-center">What our members say</p>
         </div>
+        <TestimonialCarousel />
       </section>
 
       {/* Admission Form Section */}

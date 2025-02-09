@@ -1,19 +1,20 @@
+// components/TestimonialFormModal.tsx
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ImageGalleryType } from "@/types/contents/home";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import ImageGalleryForm from "./image-gallery-form";
+import TestimonialForm from "./testimonial-form";
+import { TestimonialType } from "@/db/schemas/testimonials";
 
-export default function ImageFormModal({
+export default function TestimonialFormModal({
   open,
   onOpenChange,
   initialData,
 }: {
-  initialData: ImageGalleryType | null;
+  initialData: TestimonialType | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -21,10 +22,10 @@ export default function ImageFormModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="px-2">
         <DialogHeader className="pl-6">
-          <DialogTitle>Image Gallery</DialogTitle>
+          <DialogTitle>Testimonial</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[75vh] px-3">
-          <ImageGalleryForm
+          <TestimonialForm
             initialData={initialData}
             onSuccess={() => onOpenChange(false)}
           />
