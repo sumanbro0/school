@@ -43,6 +43,27 @@
       "when": 1738756798706,
       "tag": "0005_giant_crusher_hogan",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1739046732892,
+      "tag": "0006_steady_post",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1739051281021,
+      "tag": "0007_icy_kate_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1739056324643,
+      "tag": "0008_typical_storm",
+      "breakpoints": true
     }
   ]
 }

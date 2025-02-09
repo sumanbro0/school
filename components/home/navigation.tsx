@@ -11,7 +11,7 @@ export async function Navigation() {
 
   return (
     <header className="w-screen fixed top-0 left-0 right-0 z-50 shadow-lg">
-      <div className="bg-background text-white">
+      <div className="bg-background ">
         <div className="container mx-auto max-w-7xl px-4 py-2 flex flex-wrap items-center justify-between gap-4">
           <div className="w-80 aspect-auto h-16 relative">
             <Link href="/" className="flex gap-2 items-center">
@@ -26,14 +26,14 @@ export async function Navigation() {
             <div className="flex items-center space-x-6">
               <Link
                 href={`tel:${school?.phone}`}
-                className="flex items-center gap-2 hover:text-gray-200"
+                className="flex items-center gap-2 hover:text-gray-800"
               >
                 <Phone className="h-4 w-4" />
                 <span>{school?.phone}</span>
               </Link>
               <Link
                 href={`mailto:${school?.email}`}
-                className="flex items-center gap-2 hover:text-gray-200"
+                className="flex items-center gap-2 hover:text-gray-800"
               >
                 <Mail className="h-4 w-4" />
                 <span>{school?.email}</span>

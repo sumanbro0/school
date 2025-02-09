@@ -1,35 +1,43 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import HighlightFormModal from "./highlight-form-modal";
 import { Edit, Plus } from "lucide-react";
+
+import CategoryFormModal from "./category-modal";
+import BlogFormModal from "./blog-form-modal";
+import { BlogType } from "@/types/contents/home";
 import {
   Card,
   CardContent,
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
-import { useGetHighlight } from "../api/use-highlights";
+import { useGetBlogs } from "../api/use-blogs";
 
-const Highlight = () => {
+const BlogsCms = () => {
+  const [openCategory, setOpenCategory] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const { data } = useGetHighlight();
-  const [initialData, setInitialData] = React.useState<{
-    id: number;
-    backgroundImage: string;
-    title: string;
-    subTitle: string | null;
-    descreption: string;
-  } | null>(null);
+  const { data } = useGetBlogs();
+  const [initialData, setInitialData] = React.useState<null | BlogType>(null);
   return (
     <>
       <div className="flex items-center w-full">
         <div className="flex items-center w-full justify-between">
-          <h1 className="text-xl font-semibold">Highlights</h1>
-          <Button onClick={() => setOpen(true)}>
-            <Plus size={24} />
-            Add Highlight
-          </Button>
+          <h1 className="text-xl font-semibold">Blogs</h1>
+          <div className="flex items-center gap-2">
+            <Button size={"sm"} onClick={() => setOpen(true)}>
+              <Plus size={24} />
+              Blogs
+            </Button>
+            <Button
+              size={"sm"}
+              variant={"secondary"}
+              onClick={() => setOpenCategory(true)}
+            >
+              <Plus size={24} />
+              Category
+            </Button>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3 pt-4">
@@ -38,7 +46,7 @@ const Highlight = () => {
             <CardContent className="flex items-center justify-between w-full p-4">
               <div className="flex flex-col ">
                 <CardTitle>{d.title}</CardTitle>
-                <CardDescription>{d.subTitle}</CardDescription>
+                <CardDescription>{d.excerpt}</CardDescription>
               </div>
               <Button
                 onClick={() => {
@@ -54,13 +62,15 @@ const Highlight = () => {
           </Card>
         ))}
       </div>
-      <HighlightFormModal
-        initialData={initialData}
+      <CategoryFormModal open={openCategory} onOpenChange={setOpenCategory} />
+      <BlogFormModal
+        postType={"blog"}
         open={open}
         onOpenChange={setOpen}
+        initialData={initialData}
       />
     </>
   );
 };
 
-export default Highlight;
+export default BlogsCms;

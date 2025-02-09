@@ -4,6 +4,8 @@ import { handle } from 'hono/vercel'
 import enquiry from './enquiry'
 import school from './school'
 import home from './home'
+import blogs from './blogs'
+import fee from './fee'
 
 //'nodejs'
  export const runtime = 'nodejs'
@@ -22,6 +24,8 @@ const routes=app
     .route("/enquiry",enquiry)
     .route("/school",school)
     .route("/home",home)
+    .route("/blogs",blogs)
+    .route("/fees",fee)
 
 
 

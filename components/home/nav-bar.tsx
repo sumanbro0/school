@@ -21,6 +21,9 @@ const NavBar = ({}: { logoLabel: string }) => {
   return (
     <nav className=" bg-[#141744]  text-gray-50 w-full  hidden md:block px-4 ">
       <div className=" flex items-center justify-between py-2  px-4 max-w-2xl mx-auto">
+        <NavLink pathName={pathName} href="/">
+          Home
+        </NavLink>
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-1 font-medium transition-colors">
             Admission <ChevronDown className="h-4 w-4" />
@@ -42,6 +45,7 @@ const NavBar = ({}: { logoLabel: string }) => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
         <NavLink pathName={pathName} href="/academics">
           Academics
         </NavLink>
@@ -101,8 +105,10 @@ function NavLink({
       href={href}
       className={cn(
         " font-medium transition-colors",
-        pathName[pathName.length - 1] == href.split("/")[1] &&
-          "bg-background text-primary hover:text-primary px-2 rounded-lg"
+        href.split("/").includes(pathName[0]) ||
+          (pathName.join() === "" &&
+            href === "/" &&
+            "bg-background text-primary hover:text-primary px-2 rounded-lg")
       )}
     >
       {children}

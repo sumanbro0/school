@@ -1,56 +1,111 @@
 import AdmissionForm from "@/components/home/admission-form";
 import { AdmissionProcess } from "@/components/home/admission-process";
 import TriggerFormModal from "@/components/home/trigger-form-modal";
-import { TrustedSection } from "@/components/home/trusted-section";
-import { Button } from "@/components/ui/button";
+import CarouselSection from "@/components/shared/gallery-carousel";
+import GridSection from "@/components/shared/grid";
+import Section from "@/components/shared/section";
 import { Card } from "@/components/ui/card";
+import { client } from "@/lib/hono";
 
 import { BookOpen, GraduationCap, School } from "lucide-react";
 import React from "react";
 
-export default function Home() {
+export default async function Home() {
+  const heroData = await client.api.home.hero.$get();
+  if (!heroData.ok) {
+    return <div>Failed to fetch hero data</div>;
+  }
+  const data = await heroData.json();
+  const welcomeData = await (await client.api.home.welcome.$get()).json();
+  const highlightsData = await (await client.api.home.highlights.$get()).json();
+  const videoGalleryData = await (
+    await client.api.home["video-gallery"].$get()
+  ).json();
+
+  const imageGalleryData = await client.api.home["image-gallery"].$get();
+  if (!imageGalleryData.ok) {
+    return <div>Failed to fetch hero data</div>;
+  }
+
+  const imgdata = await imageGalleryData.json();
+
   return (
     <div className="min-h-screen bg-background mx-auto">
       {/* Hero Section */}
       <section
         className="relative h-[700px]  bg-gradient-to-r from-primary to-blue-600 bg-cover bg-center"
         style={{
-          backgroundImage:
-            'url("https://www.mdnpublicschool.com//upload/banner/6698d5d4cc856-rocksport-home-banner-min1693813060.jpg")',
+          backgroundImage: `url(${data.data.backgroundImage})`,
         }}
       >
         <div className="absolute inset-0 bg-black/60" />
         <div className="container relative z-10 mx-auto pt-80 flex h-full max-w-6xl flex-col items-center justify-center px-4 text-center text-white">
-          <h1 className="mb-6 text-5xl font-bold">
-            Welcome to Orchids International School
-          </h1>
-          <p className="mb-8 text-xl">
-            Nurturing Excellence, Building Future Leaders
-          </p>
-          <TriggerFormModal />
+          {data.data.title && (
+            <h1 className="mb-6 text-5xl font-bold">{data.data.title}</h1>
+          )}
+          <p className="mb-8 text-xl">{data.data.subTitle}</p>
+          <TriggerFormModal triggerText={data.data.buttonText || undefined} />
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 flex flex-col gap-8">
-        <h2 className="text-3xl font-bold text-center my-16">
-          School Admission In Mumbai 2025-26
-        </h2>
-        <p>
-          School Admission in Mumbai is highly competitive due to the rampant
-          population. With many choices at hand, selecting the right school for
-          a child is not an easy thing to do. Some of the influences that have a
-          say in admission into schools in Mumbai include the syllabus of the
-          school, infrastructure, location, reputation, and ...
-          <span className="text-red-700">show more</span>
-        </p>
-        <Button
-          className="max-w-sm mx-auto bg-black hover:bg-black/70"
-          size="lg"
-        >
-          Learn more
-        </Button>
+      <div className="mx-auto max-w-7xl px-4 flex flex-col ">
+        <Section
+          description={welcomeData.data.descreption}
+          imageSrc={welcomeData.data.backgroundImage}
+          title={welcomeData.data.title}
+          titlePosition="top"
+          subtitle={welcomeData.data.subTitle || ""}
+        />
       </div>
-      <TrustedSection />
+      <div className="mx-auto max-w-7xl px-4 flex flex-col ">
+        <GridSection
+          title="Highlights"
+          subtitle="Check out our latest events and activities"
+          columns={3}
+          data={highlightsData.data.map((d) => {
+            return {
+              title: d.title,
+              imageUrl: d.backgroundImage,
+              excerpt: d.subTitle || "",
+              content: d.descreption,
+              id: d.id,
+              slug: d.id.toString(),
+            };
+          })}
+        />
+      </div>
+      <div className="mx-auto max-w-7xl px-4 flex flex-col  ">
+        <CarouselSection
+          itemsPerView={1}
+          sectionTitle="Video Gallery"
+          sectionSubtitle="Watch our latest videos and events"
+          items={videoGalleryData.data.map((d) => {
+            return {
+              title: d.title,
+              caption: d.subTitle || "",
+              mediaUrl: d.videoUrl || "https://youtu.be/Xj054r2-qNs",
+              mediaType: "video",
+              id: d.id.toString(),
+            };
+          })}
+        />
+      </div>
+      <div className="mx-auto max-w-7xl px-4 flex flex-col  ">
+        <CarouselSection
+          itemsPerView={3}
+          sectionTitle="Image Gallery"
+          sectionSubtitle="Watch our latest videos and events"
+          items={imgdata.data.map((d) => {
+            return {
+              title: d.title,
+              caption: d.subTitle || "",
+              mediaUrl: d.imageUrl || "https://avatar.vercel.sh/jane",
+              mediaType: "image",
+              id: d.id.toString(),
+            };
+          })}
+        />
+      </div>
       <AdmissionProcess />
       {/* Features Section */}
       <section className="py-16 flex flex-col gap-10 bg-gray-50">

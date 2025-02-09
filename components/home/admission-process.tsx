@@ -38,7 +38,7 @@ export function AdmissionProcess() {
   return (
     <div className="my-10 flex flex-col gap-10">
       <h3 className="text-center text-2xl font-bold mb-8">
-        School Admission Process In Mumbai
+        School Admission Process
       </h3>
 
       {/* Steps Progress */}

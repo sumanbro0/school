@@ -12,7 +12,8 @@ export const useGetHero=()=>{
             }
 
             return res.json()
-        }
+        },
+        select: (data) => ({data:data.data})
     })
 }
 

@@ -1,9 +1,10 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { useFormModalStore } from "@/hooks/use-form-modal-store";
 import { Play } from "lucide-react";
-import Image from "next/image";
 
 export default function AboutUs() {
+  const { setIsOpen } = useFormModalStore();
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -14,35 +15,13 @@ export default function AboutUs() {
               Shaping Tomorrow&apos;s Leaders
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              With over 25 years of excellence in education, we&apos;re committed to
-              nurturing young minds and fostering a love for learning that lasts a
-              lifetime.
+              With over 25 years of excellence in education, we&apos;re
+              committed to nurturing young minds and fostering a love for
+              learning that lasts a lifetime.
             </p>
-            <Button size="lg">Schedule a Visit</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Life at Our School
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <Card key={item} className="overflow-hidden">
-                <CardContent className="p-0">
-                  <Image
-                  width={256}
-                    height={384}
-                  src={`https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1000`}
-                    alt={`Gallery image ${item}`}
-                    className="w-full h-64 object-cover"
-                  />
-                </CardContent>
-              </Card>
-            ))}
+            <Button onClick={() => setIsOpen(true)} size="lg">
+              Schedule a Visit
+            </Button>
           </div>
         </div>
       </section>
@@ -70,9 +49,9 @@ export default function AboutUs() {
                 Our Journey of Excellence
               </h3>
               <p className="text-muted-foreground mb-6">
-                Watch how we&apos;ve grown from a small school to one of the region&apos;s
-                most respected educational institutions, maintaining our commitment
-                to excellence every step of the way.
+                Watch how we&apos;ve grown from a small school to one of the
+                region&apos;s most respected educational institutions,
+                maintaining our commitment to excellence every step of the way.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-center">

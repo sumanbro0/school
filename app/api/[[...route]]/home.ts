@@ -1,62 +1,52 @@
 import { Hono } from "hono"
-import {clerkMiddleware,getAuth} from "@hono/clerk-auth"
+import {clerkMiddleware} from "@hono/clerk-auth"
 import { db } from "@/db"
 import { hero, highlight, imageGallery, insertHeroSchema, insertHighlightSchema, insertImageGallerySchema, insertVideoGallerySchema, insertWelcomeSchema, selectHeroSchema, selectHighlightSchema, selectImageGallerySchema, selectVideoGallerySchema, selectWelcomeSchema, videoGallery, welcome } from "@/db/schemas/home-content"
 import { zValidator } from "@hono/zod-validator"
 import { eq } from "drizzle-orm"
+import { z } from "zod"
 
 const app = new Hono()
     .get('/hero',
-        clerkMiddleware(),
         async (c) => {
-              const auth = getAuth(c)
-                if (!auth?.userId) {
-                    return c.json({
-                    message: 'You are not logged in.',
-                    },400)
-                }
+      
                 const [heroData]=await db.select().from(hero).limit(1)
                 return c.json(
                     {data:heroData},200
                 )
     })
     .get('/welcome',
-        clerkMiddleware(),
         async (c) => {
-              const auth = getAuth(c)
-                if (!auth?.userId) {
-                    return c.json({
-                    message: 'You are not logged in.',
-                    },400)
-                }
+              
                 const [welcomeData]=await db.select().from(welcome).limit(1)
                 return c.json(
                     {data:welcomeData},200
                 )
     })
     .get('/highlights',
-        clerkMiddleware(),
         async (c) => {
-              const auth = getAuth(c)
-                if (!auth?.userId) {
-                    return c.json({
-                    message: 'You are not logged in.',
-                    },400)
-                }
+            
                 const data=await db.select().from(highlight).limit(3)
                 return c.json(
                     {data:data},200
                 )
     })
-    .get('/video-gallery',
-        clerkMiddleware(),
+    .get('/highlight/:id',
+        zValidator(
+            "param",
+            z.object({
+                id: z.coerce.number()
+            })),
         async (c) => {
-              const auth = getAuth(c)
-                if (!auth?.userId) {
-                    return c.json({
-                    message: 'You are not logged in.',
-                    },400)
-                }
+            
+                const data=await db.select().from(highlight).where(eq(highlight.id,c.req.valid("param").id))
+                return c.json(
+                    {data:data},200
+                )
+    })
+    .get('/video-gallery',
+        async (c) => {
+      
                 const data=await db.select().from(videoGallery)
                 console.log(data)
                 return c.json(
@@ -64,14 +54,8 @@ const app = new Hono()
                 )
     })
     .get('/image-gallery',
-        clerkMiddleware(),
         async (c) => {
-              const auth = getAuth(c)
-                if (!auth?.userId) {
-                    return c.json({
-                    message: 'You are not logged in.',
-                    },400)
-                }
+         
                 const data=await db.select().from(imageGallery)
                 return c.json(
                     {data:data},200
