@@ -1,16 +1,19 @@
 "use client";
-import { useGetBlogs, useGetCategories } from "@/components/home/api/use-blogs";
+import { useGetBlogs } from "@/components/home/api/use-blogs";
+import Loader from "@/components/loader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Blogs() {
   // const { data: categories } = useGetCategories();
-  const { data: blogPosts } = useGetBlogs();
+  const { data: blogPosts, isLoading } = useGetBlogs();
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Category Slider */}

@@ -1,5 +1,6 @@
 "use client";
 import { useGetFees } from "@/components/home/api/use-fee";
+import Loader from "@/components/loader";
 import {
   Card,
   CardContent,
@@ -19,7 +20,10 @@ const AdmissionForm = dynamic(
 );
 
 export default function Page() {
-  const { data: feeStructures } = useGetFees();
+  const { data: feeStructures, isLoading } = useGetFees();
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen bg-background">

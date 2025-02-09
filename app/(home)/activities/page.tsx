@@ -1,6 +1,6 @@
 "use client";
 import { useGetActivities } from "@/components/home/api/use-blogs";
-import { Badge } from "@/components/ui/badge";
+import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,13 +8,16 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Activities() {
   // const { data: categories } = useGetCategories();
-  const { data: activities } = useGetActivities();
+  const { data: activities, isLoading } = useGetActivities();
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Category Slider */}

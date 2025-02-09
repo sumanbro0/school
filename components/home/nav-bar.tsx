@@ -100,15 +100,24 @@ function NavLink({
   children: React.ReactNode;
   pathName: string[];
 }) {
+  const isSelect =
+    href.split("/").includes(pathName[0]) ||
+    (pathName.join() === "" && href === "/");
+
   return (
     <Link
       href={href}
+      // className={cn(
+      //   " font-medium transition-colors",
+      //   href.split("/").includes(pathName[0]) ||
+      //     (pathName.join() === "" &&
+      //       href === "/" &&
+      //       "bg-background text-primary hover:text-primary px-2 rounded-lg")
+      // )}
       className={cn(
         " font-medium transition-colors",
-        href.split("/").includes(pathName[0]) ||
-          (pathName.join() === "" &&
-            href === "/" &&
-            "bg-background text-primary hover:text-primary px-2 rounded-lg")
+        isSelect &&
+          "bg-background text-primary hover:text-primary px-2 rounded-lg"
       )}
     >
       {children}
