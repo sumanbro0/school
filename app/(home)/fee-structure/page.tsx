@@ -10,7 +10,7 @@ import { client } from "@/lib/hono";
 import Image from "next/image";
 import React from "react";
 
-async function App() {
+async function getFeeStructures() {
   const data = await client.api.fees.$get();
 
   if (!data.ok) {
@@ -18,6 +18,11 @@ async function App() {
   }
 
   const { feeStructures } = await data.json();
+  return feeStructures;
+}
+
+export default async function Page() {
+  const feeStructures = await getFeeStructures();
 
   return (
     <div className="min-h-screen bg-background">
@@ -101,5 +106,3 @@ async function App() {
     </div>
   );
 }
-
-export default App;
