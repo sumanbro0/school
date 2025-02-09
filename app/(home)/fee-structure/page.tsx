@@ -1,4 +1,3 @@
-import AdmissionForm from "@/components/home/admission-form";
 import {
   Card,
   CardContent,
@@ -7,8 +6,16 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { client } from "@/lib/hono";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
+
+const AdmissionForm = dynamic(
+  () => import("@/components/home/admission-form"),
+  {
+    ssr: false,
+  }
+);
 
 async function getFeeStructures() {
   const data = await client.api.fees.$get();
