@@ -13,7 +13,12 @@ import React from "react";
 export default async function Home() {
   const heroData = await client.api.home.hero.$get();
   if (!heroData.ok) {
-    return <div>Failed to fetch hero data</div>;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p>Failed to fetch hero data</p>
+        <pre>{heroData.text()}</pre>
+      </div>
+    );
   }
   const data = await heroData.json();
   const welcomeData = await (await client.api.home.welcome.$get()).json();
@@ -24,7 +29,12 @@ export default async function Home() {
 
   const imageGalleryData = await client.api.home["image-gallery"].$get();
   if (!imageGalleryData.ok) {
-    return <div>Failed to fetch hero data</div>;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p>Failed to fetch hero data</p>
+        <pre>{imageGalleryData.text()}</pre>
+      </div>
+    );
   }
 
   const imgdata = await imageGalleryData.json();
