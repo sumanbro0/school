@@ -1,3 +1,5 @@
+"use client";
+import { useGetFees } from "@/components/home/api/use-fee";
 import {
   Card,
   CardContent,
@@ -5,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { client } from "@/lib/hono";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
@@ -17,19 +18,8 @@ const AdmissionForm = dynamic(
   }
 );
 
-async function getFeeStructures() {
-  const data = await client.api.fees.$get();
-
-  if (!data.ok) {
-    throw new Error("An error occurred");
-  }
-
-  const { feeStructures } = await data.json();
-  return feeStructures;
-}
-
-export default async function Page() {
-  const feeStructures = await getFeeStructures();
+export default function Page() {
+  const { data: feeStructures } = useGetFees();
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,7 +36,7 @@ export default async function Page() {
 
       <section className="py-12">
         <div className="container mx-auto px-4 max-w-4xl">
-          {feeStructures.map((level, index) => (
+          {feeStructures?.data?.map((level, index) => (
             <Card key={index} className="mb-12 shadow-none border-0">
               <CardContent className="p-0">
                 <div
