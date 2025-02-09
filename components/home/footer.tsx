@@ -1,15 +1,22 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function Footer() {
   return (
-    <footer className=" pt-16 pb-8 bg-gray-900 text-primary-foreground ">
+    <footer className=" py-8 bg-gray-900 text-primary-foreground ">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* About Section */}
-          <div>
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"> */}
+        {/* <div>
             <h3 className="text-lg font-bold mb-4">About Us</h3>
             <p className="text-muted-foreground mb-4">
               Nurturing minds, building character, and shaping futures through excellence in education since 1995.
@@ -30,7 +37,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2 hover:text-primary ">
@@ -62,7 +68,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
             <ul className="space-y-4">
@@ -87,7 +92,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h3 className="text-lg font-bold mb-4">Newsletter</h3>
             <p className="text-muted-foreground mb-4">
@@ -98,22 +102,21 @@ export default function Footer() {
               <Button className="w-full">Subscribe</Button>
             </div>
           </div>
-        </div>
+          */}
+        {/* </div> */}
 
         {/* Bottom Bar */}
-        <div className="border-t pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} School Name. All rights reserved.
-            </p>
-            <div className="flex space-x-6 text-sm">
-              <Link href="/privacy" className="text-muted-foreground hover:text-primary">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-muted-foreground hover:text-primary">
-                Terms of Service
-              </Link>
-            </div>
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} MDN public school. All rights reserved.
+          </p>
+          <div className="flex space-x-6 text-sm">
+            <Link href="/#" className="text-muted-foreground hover:text-muted">
+              Privacy Policy
+            </Link>
+            <Link href="/#" className="text-muted-foreground hover:text-muted">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
