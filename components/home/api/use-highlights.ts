@@ -47,7 +47,7 @@ export const useCreateHighlight=()=>{
             return res.json()
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey:["highlight"]})
+            queryClient.invalidateQueries({queryKey:["highlights"]})
         }
     })
 }

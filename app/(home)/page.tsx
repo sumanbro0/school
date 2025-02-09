@@ -54,7 +54,10 @@ export default async function Home() {
             <h1 className="mb-6 text-5xl font-bold">{data.data.title}</h1>
           )}
           <p className="mb-8 text-xl">{data.data.subTitle}</p>
-          <TriggerFormModal triggerText={data.data.buttonText || undefined} />
+          <TriggerFormModal
+            className="bg-[#d19c1f] hover:bg-[#ac811b] text-gray-50"
+            triggerText={data.data.buttonText + " ->" || undefined}
+          />
         </div>
       </section>
 
@@ -104,7 +107,7 @@ export default async function Home() {
         <CarouselSection
           itemsPerView={3}
           sectionTitle="Image Gallery"
-          sectionSubtitle="Watch our latest videos and events"
+          sectionSubtitle="Watch our latest  events"
           items={imgdata.data.map((d) => {
             return {
               title: d.title,

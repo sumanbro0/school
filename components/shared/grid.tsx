@@ -73,7 +73,7 @@ const GridSection = ({
               transition={{ duration: 0.3 }}
               className="h-full"
             >
-              <Card className="h-full flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="h-full flex flex-col overflow-hidden hover:shadow-md transition-shadow duration-300 border-0">
                 {item.imageUrl && (
                   <div className="relative h-64 w-full">
                     <Image
@@ -127,9 +127,7 @@ const GridSection = ({
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full" variant={"secondary"} asChild>
-                    <Link href={`/articles/${item.slug}`}>
-                      Read More -&gt;{" "}
-                    </Link>
+                    <Link href={`/blogs`}>Read More -&gt; </Link>
                   </Button>
                 </CardFooter>
               </Card>

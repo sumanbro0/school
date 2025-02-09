@@ -47,6 +47,7 @@ export default function HighlightForm({
           onSuccess: () => {
             toast.success("Highlight Content updated successfully");
             onSuccess?.();
+            form.reset();
           },
           onError: (error) => {
             toast.error(error.message);
@@ -127,9 +128,7 @@ export default function HighlightForm({
           defaultValue={""}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
-                Subtitile <span className="text-xs text-muted">(optional)</span>
-              </FormLabel>
+              <FormLabel>Descreption</FormLabel>
               <FormControl>
                 <Textarea
                   rows={5}

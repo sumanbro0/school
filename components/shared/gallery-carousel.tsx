@@ -1,4 +1,3 @@
-// components/CarouselSection.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -64,7 +63,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
           src={thumbnailUrl}
           alt={item.title}
           layout="fill"
-          style={{ objectFit: "cover" }}
+          objectFit="cover"
           objectPosition="top center"
           className="rounded-lg"
         />
@@ -75,7 +74,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
           src={item.mediaUrl}
           alt={item.title}
           layout="fill"
-          style={{ objectFit: "cover" }}
+          objectFit="cover"
           className="rounded-lg"
         />
       );
@@ -87,46 +86,52 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
       case 1:
         return "basis-full";
       case 2:
-        return "basis-1/2";
+        return "basis-full sm:basis-1/2";
       case 3:
-        return "basis-1/3";
+        return "basis-full sm:basis-1/2 lg:basis-1/3";
       case 4:
-        return "basis-1/4";
+        return "basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4";
       default:
-        return "basis-1/3";
+        return "basis-full sm:basis-1/2 lg:basis-1/3";
     }
   };
 
   return (
-    <section className={cn("py-12", className)}>
+    <section className={cn("py-8 sm:py-12", className)}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-2">{sectionTitle}</h2>
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+            {sectionTitle}
+          </h2>
           {sectionSubtitle && (
-            <p className="text-xl text-gray-600">{sectionSubtitle}</p>
+            <p className="text-lg sm:text-xl text-gray-600">
+              {sectionSubtitle}
+            </p>
           )}
         </div>
 
         <Carousel className="w-full mx-auto">
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-2 sm:-ml-4">
             {items.map((item) => (
               <CarouselItem
                 key={item.id}
-                className={cn("pl-4", getItemClass())}
+                className={cn("pl-2 sm:pl-4", getItemClass())}
               >
                 <Card
-                  className="relative h-[450px] cursor-pointer"
+                  className="relative h-[300px] sm:h-[400px] cursor-pointer"
                   onClick={() => openModal(item)}
                 >
                   <CardContent className="p-0 h-full">
                     {renderMedia(item)}
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end items-center p-4 rounded-lg">
-                      <h3 className="text-white text-xl font-bold mb-2">
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end items-center p-3 sm:p-4 rounded-lg">
+                      <h3 className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-white text-sm mb-4">{item.caption}</p>
+                      <p className="text-white text-xs sm:text-sm mb-2 sm:mb-4">
+                        {item.caption}
+                      </p>
                       {item.buttonText && (
-                        <span className="text-white text-sm underline">
+                        <span className="text-white text-xs sm:text-sm underline">
                           {item.buttonText}
                         </span>
                       )}
@@ -136,8 +141,8 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
         </Carousel>
 
         <ContentModal
