@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   Facebook,
@@ -7,116 +8,169 @@ import {
   Mail,
   Phone,
   MapPin,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useGetSchool } from "@/server/school";
+
+interface QuickLink {
+  name: string;
+  href: string;
+}
 
 export default function Footer() {
+  const { data } = useGetSchool();
+  const school = data?.scl;
+
+  const quickLinks: QuickLink[] = [
+    { name: "Home", href: "/" },
+    { name: "Admission", href: "/fee-structure" },
+    { name: "Academics", href: "/academics" },
+    { name: "Activities", href: "/activities" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "About Us", href: "/about" },
+  ];
+
+  const socialIcons = [
+    {
+      icon: Facebook,
+      label: "Facebook",
+      href: "https://www.facebook.com/mdnpublicschool#",
+    },
+    {
+      icon: Twitter,
+      label: "Twitter",
+      href: "https://twitter.com/mdnps_rohtak",
+    },
+    { icon: Instagram, label: "Instagram", href: "http://bit.ly/MDNPS_YC" },
+    {
+      icon: Youtube,
+      label: "Youtube",
+      href: "https://www.instagram.com/mdnpublicschool/",
+    },
+  ];
+
+  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle newsletter subscription
+  };
+
   return (
-    <footer className=" py-8 bg-gray-900 text-primary-foreground ">
-      <div className="container mx-auto px-4">
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"> */}
-        {/* <div>
-            <h3 className="text-lg font-bold mb-4">About Us</h3>
-            <p className="text-muted-foreground mb-4">
-              Nurturing minds, building character, and shaping futures through excellence in education since 1995.
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* About Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white mb-4">About Us</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Nurturing minds, building character, and shaping futures through
+              excellence in education.
             </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Youtube className="h-5 w-5" />
-              </Link>
+            <div className="flex space-x-4 pt-4">
+              {socialIcons.map(({ icon: Icon, label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="hover:text-primary-foreground transition-colors"
+                  aria-label={label}
+                >
+                  <Icon className="h-5 w-5" />
+                </Link>
+              ))}
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2 hover:text-primary ">
-              <li>
-                <Link href="/admission" className="text-muted-foreground hover:text-primary">
-                  Admission
-                </Link>
-              </li>
-              <li>
-                <Link href="/academics" className="text-muted-foreground hover:text-primary">
-                  Academics
-                </Link>
-              </li>
-              <li>
-                <Link href="/activities" className="text-muted-foreground hover:text-primary">
-                  Activities
-                </Link>
-              </li>
-              <li>
-                <Link href="/blogs" className="text-muted-foreground hover:text-primary">
-                  Latest News
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="text-muted-foreground hover:text-primary">
-                  Careers
-                </Link>
-              </li>
+          {/* Quick Links Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-primary-foreground transition-colors inline-flex items-center group"
+                  >
+                    <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+          {/* Contact Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white mb-4">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-primary shrink-0" />
-                <span className="text-muted-foreground">
-                  123 Education Street, Learning City, ST 12345
-                </span>
+                <MapPin className="h-5 w-5 text-primary shrink-0 mt-1" />
+                <span className="text-gray-400 text-sm">{school?.address}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary shrink-0" />
-                <Link href="tel:+1234567890" className="text-muted-foreground hover:text-primary">
-                  (123) 456-7890
+                <Link
+                  href={`tel:${school?.phone}`}
+                  className="text-gray-400 hover:text-primary-foreground transition-colors text-sm"
+                >
+                  {school?.phone}
                 </Link>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
-                <Link href="mailto:info@school.com" className="text-muted-foreground hover:text-primary">
-                  info@school.com
+                <Link
+                  href={`mailto:${school?.email}`}
+                  className="text-gray-400 hover:text-primary-foreground transition-colors text-sm"
+                >
+                  {school?.email}
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Newsletter</h3>
-            <p className="text-muted-foreground mb-4">
-              Subscribe to our newsletter for updates and news.
+          {/* Newsletter Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white mb-4">Newsletter</h3>
+            <p className="text-gray-400 text-sm">
+              Stay updated with our latest news and updates.
             </p>
-            <div className="space-y-2">
-              <Input type="email" placeholder="Enter your email" />
-              <Button className="w-full">Subscribe</Button>
-            </div>
+            <form className="space-y-2" onSubmit={handleSubscribe}>
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-gray-800 border-gray-700 text-gray-300 placeholder:text-gray-500"
+              />
+              <Button
+                type="submit"
+                className="w-full bg-primary hover:bg-primary/90 text-white"
+              >
+                Subscribe
+              </Button>
+            </form>
           </div>
-          */}
-        {/* </div> */}
+        </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} MDN public school. All rights reserved.
-          </p>
-          <div className="flex space-x-6 text-sm">
-            <Link href="/#" className="text-muted-foreground hover:text-muted">
-              Privacy Policy
-            </Link>
-            <Link href="/#" className="text-muted-foreground hover:text-muted">
-              Terms of Service
-            </Link>
+        <div className="pt-8 mt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-sm text-gray-400">
+              © {new Date().getFullYear()} {school?.logoLabel}. All rights
+              reserved.
+            </p>
+            <div className="flex space-x-6 text-sm">
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-primary transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-primary transition-colors"
+              >
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>
