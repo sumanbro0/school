@@ -7,7 +7,6 @@ import {
 import BlogsForm from "./blog-form";
 import { BlogType } from "@/types/contents/home";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { contentTypeEnum } from "@/db/schemas/blogs";
 
 export default function BlogFormModal({
   open,

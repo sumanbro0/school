@@ -5,12 +5,13 @@ import { getSchool } from "@/actions/get-school";
 import Image from "next/image";
 import TriggerFormModal from "./trigger-form-modal";
 import MobileNavBar from "./mobile-nav";
+import { getPages } from "@/actions/get-slug-page";
 
 export async function Navigation() {
   const school = await getSchool();
-
+  const pages = await getPages();
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 shadow-lg bg-background">
+    <header className="w-screen fixed top-0 left-0 right-0 z-50 shadow-lg bg-background">
       <div className="container mx-auto max-w-7xl px-4 py-2">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex-shrink-0">
@@ -45,12 +46,12 @@ export async function Navigation() {
               className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm px-3 py-2 rounded-md transition-colors"
               triggerText="Enroll Now"
             />
-            <MobileNavBar logoLabel={school?.logoLabel || ""} />
+            <MobileNavBar logoLabel={school?.logoLabel || ""} pages={pages} />
           </div>
         </div>
       </div>
       <div className="hidden sm:block">
-        <NavBar logoLabel={school?.logoLabel || ""} />
+        <NavBar pages={pages} />
       </div>
     </header>
   );

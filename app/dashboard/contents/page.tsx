@@ -10,6 +10,8 @@ import BlogsCms from "@/components/home/server-components/blogs";
 import ActivitiesCms from "@/components/home/server-components/activities";
 import FeesCms from "@/components/home/server-components/fees";
 import TestimonialGallery from "@/components/home/server-components/testimonial";
+import PagesCms from "@/components/home/server-components/pages";
+import PopupForm from "@/components/home/server-components/popup-form";
 
 const Page = () => {
   return (
@@ -24,12 +26,14 @@ const Page = () => {
         <TabsTrigger value="hero">Hero</TabsTrigger>
         <TabsTrigger value="welcome">Welcome</TabsTrigger>
         <TabsTrigger value="highlight">Highlight</TabsTrigger>
+        <TabsTrigger value="popup">Popups</TabsTrigger>
         <TabsTrigger value="vgallery">Video Gallery</TabsTrigger>
         <TabsTrigger value="gallery">Gallery</TabsTrigger>
         <TabsTrigger value="blogs">Blogs</TabsTrigger>
         <TabsTrigger value="activities">Activities</TabsTrigger>
         <TabsTrigger value="fees">Fee Structures</TabsTrigger>
         <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+        <TabsTrigger value="pages">Extra</TabsTrigger>
       </TabsList>
       <TabsContent value="hero" className="p-4">
         <HeroForm />
@@ -39,6 +43,9 @@ const Page = () => {
       </TabsContent>
       <TabsContent value="highlight">
         <Highlight />
+      </TabsContent>
+      <TabsContent value="popup">
+        <PopupForm />
       </TabsContent>
       <TabsContent value="vgallery">
         <VideoGallery />
@@ -57,6 +64,9 @@ const Page = () => {
       </TabsContent>
       <TabsContent value="testimonials">
         <TestimonialGallery />
+      </TabsContent>
+      <TabsContent value="pages">
+        <PagesCms />
       </TabsContent>
     </Tabs>
   );

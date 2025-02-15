@@ -1,4 +1,4 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 export const hero = pgTable("hero", {
@@ -56,3 +56,18 @@ export const imageGallery = pgTable("image_gallery", {
 
 export const insertImageGallerySchema=createInsertSchema(imageGallery);
 export const selectImageGallerySchema=createSelectSchema(imageGallery);
+
+export const popup = pgTable("popup", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity({ startWith: 1000 }),
+  title: varchar().notNull(),
+  subTitle: varchar(),
+  descreption: varchar().notNull(),
+  image: varchar().notNull(),
+  buttonText: varchar().notNull(),
+  href: varchar().notNull(),
+  isActive: boolean().default(true),
+
+});
+
+export const insertPopupSchema=createInsertSchema(popup);
+export const selectPopupSchema=createSelectSchema(popup);

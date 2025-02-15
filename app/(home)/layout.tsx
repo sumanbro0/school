@@ -1,3 +1,4 @@
+import { AutoPopup } from "@/components/auto-popup";
 import AdmissionFormModal from "@/components/home/admission-form-modal";
 import Footer from "@/components/home/footer";
 import { Navigation } from "@/components/home/navigation";
@@ -12,6 +13,7 @@ const IndexLayout = ({ children }: { children: React.ReactNode }) => {
           <Suspense>{children}</Suspense>
         </main>
         <AdmissionFormModal />
+        <AutoPopup />
         <Footer />
       </Suspense>
     </>

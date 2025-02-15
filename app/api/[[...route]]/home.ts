@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import {clerkMiddleware} from "@hono/clerk-auth"
 import { db } from "@/db"
-import { hero, highlight, imageGallery, insertHeroSchema, insertHighlightSchema, insertImageGallerySchema, insertVideoGallerySchema, insertWelcomeSchema, selectHeroSchema, selectHighlightSchema, selectImageGallerySchema, selectVideoGallerySchema, selectWelcomeSchema, videoGallery, welcome } from "@/db/schemas/home-content"
+import { hero, highlight, imageGallery, insertHeroSchema, insertHighlightSchema, insertImageGallerySchema, insertPopupSchema, insertVideoGallerySchema, insertWelcomeSchema, popup, selectHeroSchema, selectHighlightSchema, selectImageGallerySchema, selectPopupSchema, selectVideoGallerySchema, selectWelcomeSchema, videoGallery, welcome } from "@/db/schemas/home-content"
 import { zValidator } from "@hono/zod-validator"
 import { eq } from "drizzle-orm"
 import { z } from "zod"
@@ -27,6 +27,14 @@ const app = new Hono()
         async (c) => {
             
                 const data=await db.select().from(highlight).limit(3)
+                return c.json(
+                    {data:data},200
+                )
+    })
+    .get('/popup',
+        async (c) => {
+            
+                const [data]=await db.select().from(popup).limit(1)
                 return c.json(
                     {data:data},200
                 )
@@ -68,6 +76,25 @@ const app = new Hono()
         const values=c.req.valid("json")
         try {
             await db.insert(hero).values(values)
+            return c.json({
+                    message: 'Submitted successfully',
+            },200)
+            
+        } catch (error) {
+            console.log("HERO ERROR",error)
+            return c.json({
+                message: 'An error occurred',
+            },400)
+        }
+       
+    })
+    .post('/popup',
+        clerkMiddleware(),
+        zValidator("json",insertPopupSchema),
+        async (c) => {
+        const values=c.req.valid("json")
+        try {
+            await db.insert(popup).values(values)
             return c.json({
                     message: 'Submitted successfully',
             },200)
@@ -165,6 +192,27 @@ const app = new Hono()
         const {id,...data}=values
         try {
             await db.update(hero).set(data).where(eq(hero.id,values.id))
+            return c.json({
+                    message: 'Updated successfully',
+            },200)
+            
+        } catch (error) {
+            console.log("HERO ERROR",error)
+            return c.json({
+                message: 'An error occurred',
+            },400)
+        }
+       
+    })
+    .put('/popup',
+        clerkMiddleware(),
+        zValidator("json",selectPopupSchema),
+        async (c) => {
+        const values=c.req.valid("json")
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const {id,...data}=values
+        try {
+            await db.update(popup).set(data).where(eq(popup.id,values.id))
             return c.json({
                     message: 'Updated successfully',
             },200)

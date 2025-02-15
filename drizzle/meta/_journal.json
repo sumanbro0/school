@@ -71,6 +71,20 @@
       "when": 1739123001051,
       "tag": "0009_stale_wolfpack",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1739636055131,
+      "tag": "0010_windy_supreme_intelligence",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1739653903869,
+      "tag": "0011_lowly_morlun",
+      "breakpoints": true
     }
   ]
 }

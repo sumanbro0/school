@@ -2,45 +2,39 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Edit, Plus } from "lucide-react";
-import { SelectFeeStructureWithFees } from "@/types/contents/home";
+import { PageType } from "@/types/contents/home";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import FeeFormModal from "./add-fee-modal";
-import { useGetFees } from "../api/use-fee";
+import PageFormModal from "./page-form-modal";
+import { useGetPages } from "../api/use-pages";
 
-const FeesCms = () => {
+const PagesCms = () => {
   const [open, setOpen] = React.useState(false);
-  const { data } = useGetFees();
-  const [initialData, setInitialData] =
-    React.useState<null | SelectFeeStructureWithFees>(null);
+  const { data } = useGetPages();
+  const [initialData, setInitialData] = React.useState<null | PageType>(null);
+  console.log(initialData);
   return (
     <>
       <div className="flex items-center w-full">
         <div className="flex items-center w-full justify-between">
-          <h1 className="text-xl font-semibold">Fee Structures</h1>
+          <h1 className="text-xl font-semibold">Extra Pages</h1>
           <div className="flex items-center gap-2">
             <Button size={"sm"} onClick={() => setOpen(true)}>
               <Plus size={24} />
-              Fee Structure
+              Add Page
             </Button>
           </div>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3 pt-4">
         {data?.data.map((d) => (
-          <Card key={d?.feeStructure?.id}>
+          <Card key={d?.id}>
             <CardContent className="flex items-center justify-between w-full p-4">
               <div className="flex flex-col ">
-                <CardTitle>{d?.feeStructure?.grade}</CardTitle>
+                <CardTitle>{d?.title}</CardTitle>
               </div>
               <Button
                 onClick={() => {
-                  setInitialData({
-                    id: d?.feeStructure?.id,
-                    grade: d?.feeStructure?.grade,
-                    description: d?.feeStructure?.description,
-                    image: d?.feeStructure?.image,
-                    fees: d.fees ? d.fees : [],
-                  });
+                  setInitialData(d);
                   setOpen(true);
                 }}
                 variant={"ghost"}
@@ -52,13 +46,16 @@ const FeesCms = () => {
           </Card>
         ))}
       </div>
-      <FeeFormModal
+      <PageFormModal
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={(open) => {
+          setOpen(open);
+          if (!open) setInitialData(null);
+        }}
         initialData={initialData}
       />
     </>
   );
 };
 
-export default FeesCms;
+export default PagesCms;

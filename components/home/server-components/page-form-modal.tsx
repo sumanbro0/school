@@ -4,27 +4,28 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { SelectFeeStructureWithFees } from "@/types/contents/home";
+import { PageType } from "@/types/contents/home";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import FeeStructureForm from "./add-fee-form";
+import PagesForm from "./pages-form";
 
-export default function FeeFormModal({
+export default function PageFormModal({
   open,
   onOpenChange,
   initialData,
 }: {
-  initialData: SelectFeeStructureWithFees | null;
+  initialData: PageType | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  console.log(initialData);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="px-2 max-w-3xl w-full">
+      <DialogContent className="px-2 max-w-6xl w-full">
         <DialogHeader className="pl-6">
-          <DialogTitle>{!initialData && "New"} Fee Structure</DialogTitle>
+          <DialogTitle>New Page</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[calc(100vh-8rem)] px-3">
-          <FeeStructureForm
+          <PagesForm
             onSuccess={() => onOpenChange(false)}
             initialData={initialData}
           />
