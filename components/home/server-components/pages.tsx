@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Edit, Plus } from "lucide-react";
+import { Dot, Edit, Plus } from "lucide-react";
 import { PageType } from "@/types/contents/home";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import PageFormModal from "./page-form-modal";
@@ -31,6 +31,9 @@ const PagesCms = () => {
             <CardContent className="flex items-center justify-between w-full p-4">
               <div className="flex flex-col ">
                 <CardTitle>{d?.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {d?.parent} <Dot className="inline" /> {d.pageSlug}
+                </p>
               </div>
               <Button
                 onClick={() => {

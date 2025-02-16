@@ -22,52 +22,77 @@ const Page = () => {
       }}
       className="w-full"
     >
-      <TabsList>
-        <TabsTrigger value="hero">Hero</TabsTrigger>
-        <TabsTrigger value="welcome">Welcome</TabsTrigger>
-        <TabsTrigger value="highlight">Highlight</TabsTrigger>
-        <TabsTrigger value="popup">Popups</TabsTrigger>
-        <TabsTrigger value="vgallery">Video Gallery</TabsTrigger>
-        <TabsTrigger value="gallery">Gallery</TabsTrigger>
-        <TabsTrigger value="blogs">Blogs</TabsTrigger>
-        <TabsTrigger value="activities">Activities</TabsTrigger>
-        <TabsTrigger value="fees">Fee Structures</TabsTrigger>
-        <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
-        <TabsTrigger value="pages">Extra</TabsTrigger>
+      <TabsList className="flex flex-wrap justify-start h-auto gap-2 p-2">
+        <TabsTrigger className="text-sm " value="hero">
+          Hero
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="welcome">
+          Welcome
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="highlight">
+          Highlight
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="popup">
+          Popups
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="vgallery">
+          Video Gallery
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="gallery">
+          Gallery
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="blogs">
+          Blogs
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="activities">
+          Activities
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="fees">
+          Fee Structures
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="testimonials">
+          Testimonials
+        </TabsTrigger>
+        <TabsTrigger className="text-sm " value="pages">
+          Extra
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="hero" className="p-4">
-        <HeroForm />
-      </TabsContent>
-      <TabsContent value="welcome">
-        <WelcomeForm />
-      </TabsContent>
-      <TabsContent value="highlight">
-        <Highlight />
-      </TabsContent>
-      <TabsContent value="popup">
-        <PopupForm />
-      </TabsContent>
-      <TabsContent value="vgallery">
-        <VideoGallery />
-      </TabsContent>
-      <TabsContent value="gallery">
-        <ImageGallery />
-      </TabsContent>
-      <TabsContent value="blogs">
-        <BlogsCms />
-      </TabsContent>
-      <TabsContent value="activities">
-        <ActivitiesCms />
-      </TabsContent>
-      <TabsContent value="fees">
-        <FeesCms />
-      </TabsContent>
-      <TabsContent value="testimonials">
-        <TestimonialGallery />
-      </TabsContent>
-      <TabsContent value="pages">
-        <PagesCms />
-      </TabsContent>
+
+      <div className="p-2 md:p-4">
+        <TabsContent value="hero">
+          <HeroForm />
+        </TabsContent>
+        <TabsContent value="welcome">
+          <WelcomeForm />
+        </TabsContent>
+        <TabsContent value="highlight">
+          <Highlight />
+        </TabsContent>
+        <TabsContent value="popup">
+          <PopupForm />
+        </TabsContent>
+        <TabsContent value="vgallery">
+          <VideoGallery />
+        </TabsContent>
+        <TabsContent value="gallery">
+          <ImageGallery />
+        </TabsContent>
+        <TabsContent value="blogs">
+          <BlogsCms />
+        </TabsContent>
+        <TabsContent value="activities">
+          <ActivitiesCms />
+        </TabsContent>
+        <TabsContent value="fees">
+          <FeesCms />
+        </TabsContent>
+        <TabsContent value="testimonials">
+          <TestimonialGallery />
+        </TabsContent>
+        <TabsContent value="pages">
+          <PagesCms />
+        </TabsContent>
+      </div>
     </Tabs>
   );
 };

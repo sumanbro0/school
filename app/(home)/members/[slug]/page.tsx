@@ -22,7 +22,8 @@ const Pages = async (props: Props) => {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${
-              pageData.banner || "https://avatar.vercel.sh/jane"
+              pageData.banner ||
+              "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"
             })`,
           }}
         >

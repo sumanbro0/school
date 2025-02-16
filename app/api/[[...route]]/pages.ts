@@ -9,7 +9,7 @@ const app = new Hono()
     .get('/',
     async (c) => {
 
-            const pages=await db.select().from(page)
+            const pages=await db.select().from(page).orderBy(page.parent)
             
             return c.json(
                 {data:pages},200

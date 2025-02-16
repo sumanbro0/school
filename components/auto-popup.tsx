@@ -30,7 +30,7 @@ export function AutoPopup() {
       <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden">
         <div className="relative">
           {popup.image && (
-            <div className="relative w-full h-[200px] sm:h-[300px]">
+            <div className="relative aspect-square w-full h-[200px] sm:h-[300px]">
               <Image
                 src={popup.image}
                 alt={popup.title}

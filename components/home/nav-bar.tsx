@@ -62,7 +62,10 @@ const NavLink = ({ item, pathName, setIsOpen, parent }: NavLinkProps) => {
           onMouseLeave={() => setIsHovered(false)}
         >
           {item.children.map((child) => (
-            <DropdownMenuItem className="hover:bg-accent" key={child.pageSlug}>
+            <DropdownMenuItem
+              className="hover:bg-accent hover:text-primary"
+              key={child.pageSlug}
+            >
               <Link
                 href={`${generatePath(parent, child.pageSlug)}`}
                 className="w-full hover:bg-accent"
@@ -124,9 +127,15 @@ const NavBar = ({ pages }: NavBarProps) => {
       href: "#",
       label: "About Us",
       parentType: "about",
-      children: pages
-        ?.filter((page) => page.parent === "about")
-        .map(({ title, pageSlug }) => ({ title, pageSlug })),
+      children: [
+        {
+          pageSlug: "",
+          title: "our story",
+        },
+        ...(pages
+          ?.filter((page) => page.parent === "about")
+          .map(({ title, pageSlug }) => ({ title, pageSlug })) || []),
+      ],
     },
     {
       href: "#",
@@ -141,9 +150,15 @@ const NavBar = ({ pages }: NavBarProps) => {
       href: "/ac",
       label: "Academics",
       parentType: "academics",
-      children: pages
-        ?.filter((page) => page.parent === "academics")
-        .map(({ title, pageSlug }) => ({ title, pageSlug })),
+      children: [
+        {
+          title: "Academic Excellence",
+          pageSlug: "",
+        },
+        ...(pages
+          ?.filter((page) => page.parent === "academics")
+          .map(({ title, pageSlug }) => ({ title, pageSlug })) || []),
+      ],
     },
     {
       href: "#",
@@ -212,10 +227,10 @@ const NavBar = ({ pages }: NavBarProps) => {
   return (
     <nav className="bg-[#141744] text-gray-50 w-full hidden md:block sticky top-0 z-50">
       <div className="flex items-center justify-between py-1 px-6 max-w-7xl mx-auto overflow-x-auto">
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <NavLink
             parent={item.parentType || "about"}
-            key={item.href}
+            key={index}
             item={item}
             pathName={pathName}
             setIsOpen={setIsOpen}
