@@ -203,7 +203,7 @@ const NavBar = ({ pages }: NavBarProps) => {
       ],
     },
     {
-      href: "#",
+      href: "/alumni",
       label: "Alumni",
       parentType: "alumni",
       children: pages
@@ -211,7 +211,7 @@ const NavBar = ({ pages }: NavBarProps) => {
         .map(({ title, pageSlug }) => ({ title, pageSlug })),
     },
     {
-      href: "#",
+      href: "/carrer",
       label: "Career",
     },
     {
