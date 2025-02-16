@@ -53,7 +53,8 @@ export default function Footer() {
 
   const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle newsletter subscription
+    e.currentTarget.reset();
+    alert("Subscribed!");
   };
 
   return (

@@ -56,6 +56,7 @@ export function UploadWidget({
       const data = await response.json();
       setImage(data.secure_url);
       onUploadSuccess?.(data.secure_url);
+      console.log(data.secure_url);
       toast.success("Upload successful");
     } catch {
       toast.error("Upload failed");
