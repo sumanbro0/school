@@ -155,6 +155,10 @@ const NavBar = ({ pages }: NavBarProps) => {
           title: "Academic Excellence",
           pageSlug: "",
         },
+        {
+          title: "Fee structure",
+          pageSlug: "fee-structure",
+        },
         ...(pages
           ?.filter((page) => page.parent === "academics")
           .map(({ title, pageSlug }) => ({ title, pageSlug })) || []),
