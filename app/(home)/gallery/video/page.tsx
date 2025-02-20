@@ -11,7 +11,7 @@ const VideoGallery = async () => {
 
   const videos = await pageData.json();
 
-  if (!videos) {
+  if (!videos || !videos.data) {
     return (
       <div className="mx-auto text-center min-h-screen my-auto">
         Videos Not found

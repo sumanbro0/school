@@ -18,7 +18,7 @@ const ImageGallery = async () => {
 
   const images = await pageData.json();
 
-  if (!images) {
+  if (!images || !images.data) {
     return (
       <div className="mx-auto text-center min-h-screen my-auto">
         Images Not found

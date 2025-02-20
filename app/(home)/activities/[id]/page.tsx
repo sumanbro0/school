@@ -20,6 +20,12 @@ const BlogDetail = async ({ params }: Props) => {
 
   const data = await blog.json();
 
+  if (!data || !data.data) {
+    <div className="mx-auto text-center min-h-screen my-auto">
+      No Blogs Found
+    </div>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Banner Section */}
