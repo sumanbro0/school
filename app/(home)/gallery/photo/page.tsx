@@ -18,6 +18,14 @@ const ImageGallery = async () => {
 
   const images = await pageData.json();
 
+  if (!images) {
+    return (
+      <div className="mx-auto text-center min-h-screen my-auto">
+        Images Not found
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

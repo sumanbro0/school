@@ -11,6 +11,14 @@ const VideoGallery = async () => {
 
   const videos = await pageData.json();
 
+  if (!videos) {
+    return (
+      <div className="mx-auto text-center min-h-screen my-auto">
+        Videos Not found
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
