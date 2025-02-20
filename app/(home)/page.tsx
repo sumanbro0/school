@@ -20,12 +20,6 @@ const LoadingFallback = () => (
 const ErrorDisplay = ({ message }: { message: string }) => (
   <div className="min-h-screen flex flex-col items-center justify-center gap-4">
     <div className="text-red-500 text-xl font-semibold">{message}</div>
-    <button
-      onClick={() => window.location.reload()}
-      className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
-    >
-      Retry
-    </button>
   </div>
 );
 
