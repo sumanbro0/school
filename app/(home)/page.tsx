@@ -161,6 +161,7 @@ export default async function Home() {
     );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
+    console.log(error);
     return <ErrorDisplay message="Something went wrong" />;
   }
 }
