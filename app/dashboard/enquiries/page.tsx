@@ -1,5 +1,5 @@
 "use client";
-import EnquiryList from "@/components/server/enquiry/enquiry-list";
+import EnquiryList from "@/components/home/server-components/enquiry/enquiry-list";
 import { useBreadcrumbStore } from "@/hooks/use-breadcrumb-store";
 import React, { useEffect } from "react";
 
