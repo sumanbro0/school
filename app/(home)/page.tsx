@@ -62,10 +62,6 @@ export default async function Home() {
       client.api.home["image-gallery"].$get(),
     ]);
 
-    if (!heroData.ok || !imageGalleryData.ok) {
-      return <ErrorDisplay message="Failed to fetch required data" />;
-    }
-
     const data = await heroData.json();
     const welcome = await welcomeData.json();
     const highlights = await highlightsData.json();
@@ -75,58 +71,65 @@ export default async function Home() {
     return (
       <div className="min-h-screen bg-background">
         <Suspense fallback={<LoadingFallback />}>
-          <HeroSection data={data.data} />
+          {heroData && <HeroSection data={data.data} />}
 
           <div className="mx-auto max-w-7xl px-4">
             <div className="space-y-32 py-24">
-              <Section
-                description={welcome.data.descreption}
-                imageSrc={welcome.data.backgroundImage}
-                title={welcome.data.title}
-                titlePosition="top"
-                subtitle={welcome.data.subTitle || ""}
-              />
+              {welcome?.data && (
+                <Section
+                  description={welcome.data.descreption}
+                  imageSrc={welcome.data.backgroundImage}
+                  title={welcome.data.title}
+                  titlePosition="top"
+                  subtitle={welcome.data.subTitle || ""}
+                />
+              )}
 
-              <GridSection
-                title="Highlights"
-                subtitle="Check out our latest events and activities"
-                columns={3}
-                data={highlights.data.map((d) => ({
-                  title: d.title,
-                  imageUrl: d.backgroundImage,
-                  excerpt: d.subTitle || "",
-                  content: d.descreption,
-                  id: d.id,
-                  slug: d.id.toString(),
-                }))}
-              />
+              {highlights.data && (
+                <GridSection
+                  title="Highlights"
+                  subtitle="Check out our latest events and activities"
+                  columns={3}
+                  data={highlights.data.map((d) => ({
+                    title: d.title,
+                    imageUrl: d.backgroundImage,
+                    excerpt: d.subTitle || "",
+                    content: d.descreption,
+                    id: d.id,
+                    slug: d.id.toString(),
+                  }))}
+                />
+              )}
 
-              <CarouselSection
-                itemsPerView={1}
-                sectionTitle="Video Gallery"
-                sectionSubtitle="Watch our latest videos and events"
-                items={videoGallery.data.map((d) => ({
-                  title: d.title,
-                  caption: d.subTitle || "",
-                  mediaUrl: d.videoUrl || "https://youtu.be/Xj054r2-qNs",
-                  mediaType: "video",
-                  id: d.id.toString(),
-                }))}
-              />
+              {videoGallery.data && (
+                <CarouselSection
+                  itemsPerView={1}
+                  sectionTitle="Video Gallery"
+                  sectionSubtitle="Watch our latest videos and events"
+                  items={videoGallery.data.map((d) => ({
+                    title: d.title,
+                    caption: d.subTitle || "",
+                    mediaUrl: d.videoUrl || "https://youtu.be/Xj054r2-qNs",
+                    mediaType: "video",
+                    id: d.id.toString(),
+                  }))}
+                />
+              )}
 
-              <CarouselSection
-                itemsPerView={3}
-                sectionTitle="Image Gallery"
-                sectionSubtitle="Watch our latest events"
-                items={imgdata.data.map((d) => ({
-                  title: d.title,
-                  caption: d.subTitle || "",
-                  mediaUrl: d.imageUrl || "https://avatar.vercel.sh/jane",
-                  mediaType: "image",
-                  id: d.id.toString(),
-                }))}
-              />
-
+              {imgdata.data && (
+                <CarouselSection
+                  itemsPerView={3}
+                  sectionTitle="Image Gallery"
+                  sectionSubtitle="Watch our latest events"
+                  items={imgdata.data.map((d) => ({
+                    title: d.title,
+                    caption: d.subTitle || "",
+                    mediaUrl: d.imageUrl || "https://avatar.vercel.sh/jane",
+                    mediaType: "image",
+                    id: d.id.toString(),
+                  }))}
+                />
+              )}
               <AdmissionProcess />
               <WhyChooseUs />
 
