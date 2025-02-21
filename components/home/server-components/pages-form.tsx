@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InsertPageType, PageType } from "@/types/contents/home";
@@ -14,8 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { UploadWidget } from "@/components/image-uploader";
-import { Textarea } from "@/components/ui/textarea";
-
 import { toast } from "sonner";
 import {
   Select,
@@ -26,6 +24,10 @@ import {
 } from "@/components/ui/select";
 import { insertPageSchema, parentEnums } from "@/db/schemas/pages";
 import { useCreatePages, useUpdatePages } from "../api/use-pages";
+import dynamic from "next/dynamic";
+import { Textarea } from "@/components/ui/textarea";
+
+const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
 
 export default function PagesForm({
   initialData,
@@ -52,6 +54,8 @@ export default function PagesForm({
       updateMutation.mutate(
         {
           ...data,
+          metaTitle: initialData.metaTitle || "",
+          metaDescription: initialData.metaDescription || "",
           id: initialData.id || 0,
         },
         {
@@ -78,6 +82,10 @@ export default function PagesForm({
       },
     });
   };
+
+  useEffect(() => {
+    form.reset({ ...initialData, parent: initialData?.parent || "about" });
+  }, [form, initialData]);
 
   return (
     <Form {...form}>
@@ -169,9 +177,40 @@ export default function PagesForm({
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
+                <Editor initialValue={field.value} onChange={field.onChange} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="metaTitle"
+          defaultValue={""}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>SEO Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Page Title "
+                  {...field}
+                  value={field.value ?? ""}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="metaDescription"
+          defaultValue={""}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>SEO Descreption</FormLabel>
+              <FormControl>
                 <Textarea
-                  rows={20}
-                  placeholder="Enter Your page content in markdown eg. # Hello World"
+                  placeholder="Enter Page Description for seo "
                   {...field}
                   value={field.value ?? ""}
                 />

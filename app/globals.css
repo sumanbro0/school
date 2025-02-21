@@ -47,6 +47,10 @@
   }
 }
 
+.tox-tinymce-aux {
+  z-index: 99999 !important;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -127,4 +131,130 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+ck-content > blockquote,
+.ck-content > dl,
+.ck-content > dd,
+.ck-content > h1,
+.ck-content > h2,
+.ck-content > h3,
+.ck-content > h4,
+.ck-content > h5,
+.ck-content > h6,
+.ck-content > hr,
+.ck-content > figure,
+.ck-content > p,
+.ck-content > pre {
+  margin: revert;
+}
+
+.ck-content > ol,
+.ck-content > ul {
+  list-style: revert;
+  margin: revert;
+  padding: revert;
+}
+
+.ck-content > table {
+  border-collapse: revert;
+}
+
+.ck-content > h1,
+.ck-content > h2,
+.ck-content > h3,
+.ck-content > h4,
+.ck-content > h5,
+.ck-content > h6 {
+  font-size: revert;
+  font-weight: revert;
+}
+
+table {
+  border-collapse: revert;
+}
+ol,
+ul,
+li {
+  list-style: revert;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+p {
+  font-size: revert;
+  font-weight: revert;
+  /* margin: revert; */
+}
+
+
+.ck-balloon-panel{z-index:9999 !important}
+
+.ck-content {
+  max-width: none;
+}
+
+.ck-content .text-align-left {
+  text-align: left;
+}
+
+.ck-content .text-align-center {
+  text-align: center;
+}
+
+.ck-content .text-align-right {
+  text-align: right;
+}
+
+.ck-content .text-align-justify {
+  text-align: justify;
+}
+
+/* Add these styles to your global CSS */
+.ck-content figure.image-align-left {
+  float: left;
+  margin-right: 1em;
+  max-width: 50%;
+}
+
+.ck-content figure.image-align-right {
+  float: right;
+  margin-left: 1em;
+  max-width: 50%;
+}
+
+.ck-content figure.image-align-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+.ck-content figure.image-style-align-left {
+  float: left;
+  margin-right: 1em;
+}
+
+.ck-content figure.image-style-align-right {
+  float: right;
+  margin-left: 1em;
+}
+
+.ck-content figure.image-style-align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Clear floats */
+.ck-content::after {
+  content: '';
+  display: table;
+  clear: both;
 }

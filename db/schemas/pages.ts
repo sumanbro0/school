@@ -22,6 +22,8 @@ export const page = pgTable("page", {
   content: text().notNull(),
   pageSlug: text().notNull(),
   banner: text().notNull(),
+  metaTitle:text(),
+  metaDescription:text()
 });
 
 export const insertPageSchema = createInsertSchema(page);

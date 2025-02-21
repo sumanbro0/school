@@ -15,6 +15,18 @@ const app = new Hono()
                 {data:pages},200
             )
     })
+    .get('/edit/:id',
+        zValidator("param",z.object({
+            id:z.coerce.number()
+        })),
+    async (c) => {
+            const id=c.req.valid("param").id
+            const [pages]=await db.select().from(page).where(eq(page.id,id)).limit(1)
+            
+            return c.json(
+                {data:pages},200
+            )
+    })
     .get('/:slug',
     zValidator(
         "param",

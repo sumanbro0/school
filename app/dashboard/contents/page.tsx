@@ -15,13 +15,7 @@ import PopupForm from "@/components/home/server-components/popup-form";
 
 const Page = () => {
   return (
-    <Tabs
-      defaultValue="hero"
-      onValueChange={(value) => {
-        console.log(value);
-      }}
-      className="w-full"
-    >
+    <Tabs defaultValue="hero" className="w-full">
       <TabsList className="flex flex-wrap justify-start h-auto gap-2 p-2">
         <TabsTrigger className="text-sm " value="hero">
           Hero

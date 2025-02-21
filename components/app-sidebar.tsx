@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Home, Mail, School, Settings2, Text } from "lucide-react";
+import { Home, Mail, School, Settings2, StickyNote, Text } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 // import { NavUser } from "@/components/nav-user";
@@ -45,6 +45,12 @@ const data = {
       title: "Contents",
       url: "/dashboard/contents",
       icon: Text,
+      isActive: true,
+    },
+    {
+      title: "Pages",
+      url: "/dashboard/pages",
+      icon: StickyNote,
       isActive: true,
     },
     {

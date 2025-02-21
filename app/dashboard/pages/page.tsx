@@ -3,14 +3,14 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Dot, Edit, Plus } from "lucide-react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { useGetPages } from "../api/use-pages";
 import Link from "next/link";
 import Loader from "@/components/loader";
+import { useGetPages } from "@/components/home/api/use-pages";
 
-const PagesCms = () => {
+const PagesPage = () => {
   const { data, isLoading, isRefetching } = useGetPages();
 
-  if (isLoading || isRefetching) {
+  if (isLoading || isRefetching || !data) {
     return <Loader />;
   }
 
@@ -30,27 +30,26 @@ const PagesCms = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3 pt-4">
-        {data?.data &&
-          data?.data?.map((d) => (
-            <Card key={d?.id}>
-              <CardContent className="flex items-center justify-between w-full p-4">
-                <div className="flex flex-col ">
-                  <CardTitle>{d?.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    {d?.parent} <Dot className="inline" /> {d.pageSlug}
-                  </p>
-                </div>
-                <Link passHref href={`pages/${d.id}`}>
-                  <Button variant={"ghost"} size={"icon"}>
-                    <Edit size={18} />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+        {(data?.data || [])?.map((d) => (
+          <Card key={d?.id}>
+            <CardContent className="flex items-center justify-between w-full p-4">
+              <div className="flex flex-col ">
+                <CardTitle>{d?.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {d?.parent} <Dot className="inline" /> {d.pageSlug}
+                </p>
+              </div>
+              <Link passHref href={`pages/${d.id}`}>
+                <Button variant={"ghost"} size={"icon"}>
+                  <Edit size={18} />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </>
   );
 };
 
-export default PagesCms;
+export default PagesPage;

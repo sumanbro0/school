@@ -16,6 +16,24 @@ export const useGetPages=()=>{
         }
     })
 }
+export const useGetPage=(id:string)=>{
+    return useQuery({
+        queryKey:["page",id],
+        queryFn: async () => {
+            const res = await client.api.page.edit[":id"].$get({
+                param:{
+                    id:id.toString()
+                }
+            })
+            if (!res.ok) {
+                throw new Error("An error occurred")
+            }
+
+            return res.json()
+        },
+        enabled:!!id
+    })
+}
 
 
 export const useUpdatePages=()=>{
