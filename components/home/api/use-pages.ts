@@ -49,8 +49,8 @@ export const useUpdatePages=()=>{
             return res.json()
         },
             onSuccess: ({},{id}) => {
-                queryClient.invalidateQueries({queryKey:["page"]})
                 queryClient.invalidateQueries({queryKey:["page",id]})
+                queryClient.invalidateQueries({queryKey:["page"]})
             }
     })
 }

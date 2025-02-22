@@ -22,7 +22,7 @@ export async function generateMetadata(
 
   // Get the parent metadata (optional)
   const previousImages = (await parent).openGraph?.images || [];
-
+  console.log(pageData?.metaDescription, pageData?.title);
   // Return default metadata if page not found
   if (!pageData) {
     return {

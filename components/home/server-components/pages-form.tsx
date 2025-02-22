@@ -54,8 +54,8 @@ export default function PagesForm({
       updateMutation.mutate(
         {
           ...data,
-          metaTitle: initialData.metaTitle || "",
-          metaDescription: initialData.metaDescription || "",
+          metaTitle: data.metaTitle || "",
+          metaDescription: data.metaDescription || "",
           id: initialData.id || 0,
         },
         {

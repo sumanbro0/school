@@ -55,6 +55,7 @@ const app = new Hono()
         const values=c.req.valid("json")
         try {
             await db.insert(page).values(values)
+
             return c.json({
                     message: 'Submitted successfully',
             },200)
@@ -76,6 +77,7 @@ const app = new Hono()
     async (c) => {
         const values = c.req.valid("json")
         const {id, ...rest} = values
+        console.log("DATA",values.metaDescription,values.metaTitle)
         try {
             await db.update(page).set(rest).where(eq(page.id, id))
             return c.json({
