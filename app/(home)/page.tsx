@@ -74,7 +74,7 @@ export default async function Home() {
           {heroData && <HeroSection data={data.data} />}
 
           <div className="mx-auto max-w-7xl px-4">
-            <div className="space-y-32 py-24">
+            <div className="space-y-32 py-16">
               {welcome?.data && (
                 <Section
                   description={welcome.data.descreption}

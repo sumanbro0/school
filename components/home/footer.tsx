@@ -60,11 +60,11 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* About Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white mb-4">About Us</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-white">About Us</h3>
+            <p className="text-gray-400 text-base leading-relaxed">
               Nurturing minds, building character, and shaping futures through
               excellence in education.
             </p>
@@ -76,23 +76,25 @@ export default function Footer() {
                   className="hover:text-primary-foreground transition-colors"
                   aria-label={label}
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-6 w-6" />
                 </Link>
               ))}
             </div>
           </div>
 
           {/* Quick Links Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-white pl-4">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-gray-400 hover:text-primary-foreground transition-colors inline-flex items-center group"
                   >
-                    <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowRight className="h-5 w-5 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -101,27 +103,29 @@ export default function Footer() {
           </div>
 
           {/* Contact Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white mb-4">Contact Us</h3>
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold ">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-primary shrink-0 mt-1" />
-                <span className="text-gray-400 text-sm">{school?.address}</span>
+              <li className="flex items-start space-x-3 pr-4">
+                <MapPin className="h-6 w-6  shrink-0 mt-1" />
+                <span className="text-gray-400 text-base">
+                  {school?.address}
+                </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-primary shrink-0" />
+                <Phone className="h-6 w-6  shrink-0" />
                 <Link
                   href={`tel:${school?.phone}`}
-                  className="text-gray-400 hover:text-primary-foreground transition-colors text-sm"
+                  className="text-gray-400 hover: transition-colors text-base"
                 >
                   {school?.phone}
                 </Link>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-primary shrink-0" />
+                <Mail className="h-6 w-6  shrink-0" />
                 <Link
                   href={`mailto:${school?.email}`}
-                  className="text-gray-400 hover:text-primary-foreground transition-colors text-sm"
+                  className="text-gray-400 hover: transition-colors text-base"
                 >
                   {school?.email}
                 </Link>
@@ -130,12 +134,12 @@ export default function Footer() {
           </div>
 
           {/* Newsletter Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white mb-4">Newsletter</h3>
-            <p className="text-gray-400 text-sm">
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-white">Newsletter</h3>
+            <p className="text-gray-400 text-base">
               Stay updated with our latest news and updates.
             </p>
-            <form className="space-y-2" onSubmit={handleSubscribe}>
+            <form className="space-y-3" onSubmit={handleSubscribe}>
               <Input
                 type="email"
                 placeholder="Enter your email"

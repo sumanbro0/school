@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Halfway for seamless loop with duplicated content */
+  }
+}
+
 /* Customize scrollbar for Webkit browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
   width: 8px;
@@ -62,7 +71,7 @@ body {
 }
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 99%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -90,6 +99,11 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 220 70% 50%;
+    --chart-5: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-2: 340 75% 55%;
 }
  
   .dark {
@@ -171,7 +185,7 @@ ck-content > blockquote,
   font-weight: revert;
 }
 
-table {
+/* table {
   border-collapse: revert;
 }
 ol,
@@ -189,9 +203,9 @@ h6,
 pre,
 p {
   font-size: revert;
-  font-weight: revert;
+  font-weight: revert; */
   /* margin: revert; */
-}
+/* } */
 
 
 .ck-balloon-panel{z-index:9999 !important}
@@ -257,4 +271,13 @@ p {
   content: '';
   display: table;
   clear: both;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

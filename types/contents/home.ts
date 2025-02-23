@@ -39,6 +39,11 @@ export type PopupType=z.infer<typeof selectPopupSchema>;
 export type InsertPopupType=z.infer<typeof insertPopupSchema>;
 
 
+export type Pages = {
+    pageSlug: string;
+    title: string;
+    parent: "about" | "admission" | "members" | "academics" | "facilities" | "beyond-academics" | "co-curricular" | "gallery" | "alumni";
+}[] | null
 
 export type CardData = {
   id: number | string;

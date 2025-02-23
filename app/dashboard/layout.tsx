@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarInset>
         <PageHeader />
         <Suspense>
-          <main className="flex flex-1 flex-col gap-4 p-4 px-8 pt-0">
+          <main className="flex flex-1 flex-col gap-4 p-4 px-8 pt-0 bg-background">
             {children}
           </main>
         </Suspense>
