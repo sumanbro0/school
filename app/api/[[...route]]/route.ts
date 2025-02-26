@@ -8,6 +8,7 @@ import blogs from './blogs'
 import fee from './fee'
 import testimonial from './testimonial'
 import pages from './pages'
+import registration from './registration'
 
 //'nodejs'
  export const runtime = 'nodejs'
@@ -30,6 +31,7 @@ const routes=app
     .route("/fees",fee)
     .route("/testimonial",testimonial)
     .route("/page",pages)
+    .route("/registration",registration)
 
 
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,43 +32,72 @@ type NavLinkProps = {
 };
 
 const generatePath = (parent: ParentEnumValuesType, pageSlug: string) => {
-  if (pageSlug === "activities") return `/${pageSlug}`;
-
+  if (["activities", "register"].includes(pageSlug)) return `/${pageSlug}`;
+  if (pageSlug === "") return `/${parent}`;
   return `/${parent}/${pageSlug}`;
 };
 
 const NavLink = ({ item, pathName, setIsOpen, parent }: NavLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
   const isSelect =
     item.href.split("/").includes(pathName[0]) ||
     (pathName.join() === "" && item.href === "/");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (item.children && item.children.length > 0) {
     return (
       <DropdownMenu open={isHovered} onOpenChange={setIsHovered}>
         <DropdownMenuTrigger
           className={cn(
-            "flex items-center gap-1 font-medium transition-colors hover:text-blue-300 px-1 pl-2 rounded-md text-sm",
-            isSelect && "bg-primary-foreground text-primary"
+            "flex items-center gap-1 font-medium transition-all duration-200 hover:text-blue-300 px-3 py-2 rounded-md text-sm relative group",
+            isSelect && "text-blue-300",
+            isSticky ? "py-1" : "py-2"
           )}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {item.label} <ChevronDown className="h-4 w-4" />
+          {item.label}
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 transition-transform duration-200",
+              isHovered && "rotate-180"
+            )}
+          />
+
+          {/* Animated underline effect */}
+          <span
+            className={cn(
+              "absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full",
+              isSelect && "w-full"
+            )}
+          ></span>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="bg-primary text-primary-foreground"
+          className="bg-[#181b4d] border border-[#2a2f6e] rounded-md shadow-lg py-1 mt-1 min-w-40"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          align="center"
+          sideOffset={5}
         >
           {item.children.map((child) => (
             <DropdownMenuItem
-              className="hover:bg-accent hover:text-primary"
+              className="hover:bg-[#1c2164] focus:bg-[#1c2164] text-gray-100 px-4 py-2"
               key={child.pageSlug}
             >
               <Link
-                href={`${generatePath(parent, child.pageSlug)}`}
-                className="w-full hover:bg-accent"
+                href={generatePath(parent, child.pageSlug)}
+                className="w-full block hover:text-blue-300 transition-colors"
+                onClick={() => setIsHovered(false)}
               >
                 {child.title}
               </Link>
@@ -76,11 +105,18 @@ const NavLink = ({ item, pathName, setIsOpen, parent }: NavLinkProps) => {
           ))}
           {item.action && setIsOpen && (
             <DropdownMenuItem
-              className="font-medium transition-colors hover:text-blue-300 py-2 px-3 rounded-md text-sm hover:bg-[#1c2164]"
-              onClick={() => item.action?.()}
+              className="hover:bg-[#1c2164] focus:bg-[#1c2164] text-blue-300 font-medium px-4 py-2 border-t border-[#2a2f6e] mt-1"
+              onClick={() => {
+                item.action?.();
+                setIsHovered(false);
+              }}
             >
-              <Link href="#" scroll={false} className="w-full">
-                Admission Form
+              <Link
+                href="#"
+                scroll={false}
+                className="w-full block text-primary-foreground"
+              >
+                Enquiry Form
               </Link>
             </DropdownMenuItem>
           )}
@@ -93,11 +129,19 @@ const NavLink = ({ item, pathName, setIsOpen, parent }: NavLinkProps) => {
     <Link
       href={item.href}
       className={cn(
-        "font-medium transition-colors hover:text-blue-300 py-2 px-3 rounded-md text-sm",
-        isSelect && "bg-[#1c2164] text-blue-300"
+        "font-medium transition-all duration-200 hover:text-blue-300 px-3 rounded-md text-sm relative group",
+        isSelect && "text-blue-300",
+        isSticky ? "py-1" : "py-2"
       )}
     >
       {item.label}
+      {/* Animated underline effect */}
+      <span
+        className={cn(
+          "absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full",
+          isSelect && "w-full"
+        )}
+      ></span>
     </Link>
   );
 };
@@ -114,9 +158,19 @@ type NavBarProps = {
 
 const NavBar = ({ pages }: NavBarProps) => {
   const { setIsOpen } = useFormModalStore();
+  const [isSticky, setIsSticky] = useState(false);
   const pathName = usePathname()
     .split("/")
     .filter((p) => !!p);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems: NavItem[] = [
     {
@@ -130,7 +184,7 @@ const NavBar = ({ pages }: NavBarProps) => {
       children: [
         {
           pageSlug: "",
-          title: "our story",
+          title: "Our Story",
         },
         ...(pages
           ?.filter((page) => page.parent === "about")
@@ -142,9 +196,15 @@ const NavBar = ({ pages }: NavBarProps) => {
       label: "Admission",
       parentType: "admission",
       action: () => setIsOpen(true),
-      children: pages
-        ?.filter((page) => page.parent === "admission")
-        .map(({ title, pageSlug }) => ({ title, pageSlug })),
+      children: [
+        {
+          pageSlug: "register",
+          title: "Admission Form",
+        },
+        ...(pages
+          ?.filter((page) => page.parent === "admission")
+          .map(({ title, pageSlug }) => ({ title, pageSlug })) || []),
+      ],
     },
     {
       href: "/ac",
@@ -156,7 +216,7 @@ const NavBar = ({ pages }: NavBarProps) => {
           pageSlug: "",
         },
         {
-          title: "Fee structure",
+          title: "Fee Structure",
           pageSlug: "fee-structure",
         },
         ...(pages
@@ -185,7 +245,7 @@ const NavBar = ({ pages }: NavBarProps) => {
       label: "Co-Curricular",
       parentType: "co-curricular",
       children: [
-        { title: "activities", pageSlug: "activities" },
+        { title: "Activities", pageSlug: "activities" },
         ...(pages
           ?.filter((page) => page.parent === "co-curricular")
           .map(({ title, pageSlug }) => ({ title, pageSlug })) || []),
@@ -229,8 +289,18 @@ const NavBar = ({ pages }: NavBarProps) => {
   ];
 
   return (
-    <nav className="bg-[#141744] text-gray-50 w-full hidden md:block sticky top-0 z-50">
-      <div className="flex items-center justify-between py-1 px-6 max-w-7xl mx-auto overflow-x-auto">
+    <nav
+      className={cn(
+        "bg-[#141744] text-gray-50 w-full hidden md:block sticky top-0 z-50 transition-all duration-300",
+        isSticky && "shadow-lg"
+      )}
+    >
+      <div
+        className={cn(
+          "flex items-center justify-between px-6 max-w-7xl mx-auto transition-all duration-200",
+          isSticky ? "h-12" : "h-14"
+        )}
+      >
         {navItems.map((item, index) => (
           <NavLink
             parent={item.parentType || "about"}

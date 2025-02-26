@@ -33,7 +33,7 @@ export function NavigationContent({ school, pages }: NavigationContentProps) {
   return (
     <header
       className={`
-        fixed w-full top-0 left-0 right-0 z-50 bg-background
+        fixed w-screen top-0 left-0 right-0 z-50 bg-background
         transition-all duration-300 ease-in-out
         ${scrolled ? "shadow-md" : ""}
       `}
