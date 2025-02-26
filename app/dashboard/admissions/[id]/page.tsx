@@ -1,9 +1,6 @@
 import React from "react";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import { getRegistrationDetail } from "@/actions/get-school";
 import AdmissionDetailCards from "@/components/home/server-components/admission-detail-card";
-import { Button } from "@/components/ui/button";
 import BackButton from "@/components/back-button";
 
 const AdmissionDetailPage = async ({ params }: { params: { id: string } }) => {
